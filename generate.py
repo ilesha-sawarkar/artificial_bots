@@ -10,7 +10,7 @@ length =1
 width =1
 height=1
 
-pyrosim.Send_Cube(name="World", pos=[x,y, z] , size=[length, width, height])
+pyrosim.Send_Cube(name="Box", pos=[x,y, z] , size=[length, width, height])
 
 	#x=2
 	#y=2
