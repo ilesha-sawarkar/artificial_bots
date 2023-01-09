@@ -3,7 +3,7 @@
 import pybullet as p
 import time
 
-pLuhysicsClient = p.connect(p.GUI)
+physicsClient = p.connect(p.GUI)
 
 for i in range (0,1000):
 	p.stepSimulation()
