@@ -32,7 +32,7 @@ targetAngles = np.sin(np.linspace(0, np.pi*2, 1000))
 #FrontLeg 
 amplitude_FrontLeg= np.pi/3
 frequency_FrontLeg=10
-phaseOffset_FrontLeg=np.pi/7
+phaseOffset_FrontLeg=0
 
 
 targetAngles_FrontLeg = np.sin(np.linspace(0, np.pi*2, 1000))
@@ -48,7 +48,7 @@ print('targetAngles: ', targetAngles_FrontLeg)
 
 amplitude_BackLeg= np.pi/3
 frequency_BackLeg=10
-phaseOffset_BackLeg=np.pi/5
+phaseOffset_BackLeg=np.pi/4
 targetAngles_BackLeg = np.sin(np.linspace(0, np.pi*2, 1000))
 print('targetAngles: ', targetAngles_BackLeg)
 
@@ -68,7 +68,7 @@ for i in range (0,1000):
 	backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
 	print(backLegTouch)
 	frontLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
-	time.sleep(1/80)
+	time.sleep(1/1200)
 	backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
 	frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
 	
@@ -77,7 +77,7 @@ for i in range (0,1000):
 	controlMode = p.POSITION_CONTROL,
 	targetPosition = targetAngles_BackLeg[i],
 	#random.randrange(int(-math.pi/2),int(math.pi/2)),
-	maxForce = 50)
+	maxForce = 20)
 	
 	pyrosim.Set_Motor_For_Joint(robotId,
 	jointName = "Torso_FrontLeg",
@@ -85,7 +85,7 @@ for i in range (0,1000):
 	targetPosition = targetAngles_FrontLeg[i],
 	#random.randrange(int(-math.pi/2),int(math.pi/2)),
 	# +math.pi/4.0,
-	maxForce = 50)
+	maxForce = 22)
 	
 print('backLegSensorValues: ' ,backLegSensorValues)
 print('frontLegSensorValues: ' ,frontLegSensorValues)
