@@ -19,6 +19,8 @@ class NEURON:
         self.Search_For_Joint_Name(line)
 
         self.Set_Value(0.0)
+        
+        #self.type
 
     def Add_To_Value( self, value ):
 
@@ -65,6 +67,16 @@ class NEURON:
     def Set_Value(self,value):
 
         self.value = value
+    
+    def Update_Sensor_Neuron(self): #new method
+        self.values = pyrosim.Get_Touch_Sensor_Value_For_Link(
+            self.Get_Link_Name())
+        self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(
+            self.Get_Link_Name()))
+        
+    def Update_Hidden_Or_Motor_Neuron(self): #new method
+        self.Set_Value(math.pi/4.0)
+
 
 # -------------------------- Private methods -------------------------
 
@@ -121,3 +133,4 @@ class NEURON:
     def Threshold(self):
 
         self.value = math.tanh(self.value)
+        
