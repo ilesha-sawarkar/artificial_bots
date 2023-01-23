@@ -23,14 +23,14 @@ amplitude_FrontLeg= np.pi/4
 frequency_FrontLeg=10
 phaseOffset_FrontLeg=0
 targetAngles_FrontLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_FrontLeg=22
+maxForce_FrontLeg=25
 
 
 amplitude_BackLeg= np.pi/7
 frequency_BackLeg=12
 phaseOffset_BackLeg= np.pi/6
 targetAngles_BackLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_BackLeg=22
+maxForce_BackLeg=25
 
 #FrontLeg 
 

@@ -75,7 +75,7 @@ class NEURON:
             self.Get_Link_Name()))
         
     def Update_Hidden_Or_Motor_Neuron(self): #new method
-        self.Set_Value(0.0)
+        self.Set_Value(math.pi/4.0)
 
 
 # -------------------------- Private methods -------------------------
