@@ -69,15 +69,34 @@ class NEURON:
         self.value = value
     
     def Update_Sensor_Neuron(self): #new method
-        self.values = pyrosim.Get_Touch_Sensor_Value_For_Link(
+        self.value = pyrosim.Get_Touch_Sensor_Value_For_Link(
             self.Get_Link_Name())
         self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(
             self.Get_Link_Name()))
         
-    def Update_Hidden_Or_Motor_Neuron(self): #new method
-        self.Set_Value(0.0)
-
-
+    def Allow_Presynaptic_Neuron_To_Influence_Me(self, current_synapse_weight, presynaptic_neuron_value):
+            self.Add_To_Value(presynaptic_neuron_value * current_synapse_weight)
+            
+    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses): #new method
+        self.Set_Value(0)
+        
+        for synapse in synapses:
+            current_synapse_weight = synapses[synapse].Get_Weight()
+            presynaptic_neuron_value = neurons[synapse[0]].Get_Value()
+            
+            print(current_synapse_weight)
+            print(presynaptic_neuron_value)
+            if  synapse[1] == self.Get_Name():
+                current_synapse_weight = synapses[synapse].Get_Weight()
+                presynaptic_neuron_value = neurons[synapse[0]].Get_Value()
+                print("\n\n------------")
+                print(current_synapse_weight)
+                print(presynaptic_neuron_value)
+                self.Allow_Presynaptic_Neuron_To_Influence_Me(current_synapse_weight, presynaptic_neuron_value)
+                self.Threshold()
+                
+    
+        
 # -------------------------- Private methods -------------------------
 
     def Determine_Name(self,line):

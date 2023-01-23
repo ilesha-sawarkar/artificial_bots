@@ -34,7 +34,9 @@ class NEURAL_NETWORK:
             if self.neurons[i].Is_Sensor_Neuron():
                 self.neurons[i].Update_Sensor_Neuron()
             else:
-                self.neurons[i].Update_Hidden_Or_Motor_Neuron()
+                self.neurons[i].Update_Hidden_Or_Motor_Neuron(self.neurons, self.synapses)
+                #print('Hello')
+                #exit()
                 
     def Get_Neuron_Names(self):
         return self.neurons.keys()
@@ -76,6 +78,7 @@ class NEURAL_NETWORK:
         if self.Line_Contains_Synapse_Definition(line):
 
             self.Add_Synapse_According_To(line)
+            #print(self.synapses)
 
     def Line_Contains_Neuron_Definition(self,line):
 
