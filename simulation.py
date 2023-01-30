@@ -19,7 +19,7 @@ class SIMULATION :
 		elif directOrGUI == 'GUI':
 			
 			self.physicsClient = p.connect(p.GUI)
-			self.time_sleep=1/10
+			self.time_sleep=1/60
 		
 		
 		

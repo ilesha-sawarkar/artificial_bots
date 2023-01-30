@@ -43,7 +43,12 @@ class SOLUTION :
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
 			time.sleep(0.01)
 		fit_file = open(f"data/fitness{self.myID}.txt", "r")
-		self.fitness = float(fit_file.read())
+		fitness = fit_file.read()
+		if fitness == '':
+			# print(f"Waiting on {self.myID}")
+			time.sleep(0.1)
+			fitness = fit_file.read()
+		self.fitness = float(fitness)
 		print('Fitness: ', self.fitness)
 		
 		os.system(f"rm data/fitness{self.myID}.txt")
@@ -77,7 +82,7 @@ class SOLUTION :
 		
 		pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5,0,0], size=[1,0.2,0.2])
 		
-		pyrosim.Send_Joint(name="Torso_LeftLeg", parent="Torso", child="LeftLeg", type="revolute", position=[-0.5,0,1], jointAxis= "0 1 0")
+		pyrosim.Send_Joint(name="Torso_LeftLeg", parent="Torso", child="LeftLeg", type="revolute", position=[-0.5,0,1], jointAxis= "1 0 0")
 		pyrosim.Send_Joint(name="LeftLeg_LeftLowerLeg", parent="LeftLeg", child="LeftLowerLeg", type="revolute", position=[-1,0,0], jointAxis= "1 0 0")
 		pyrosim.Send_Cube(name="LeftLowerLeg", pos=[0,0,-0.5], size=[0.2,0.2,1])
 		
@@ -100,7 +105,7 @@ class SOLUTION :
 		
 		
 		pyrosim.Send_Cube(name="RightLeg", pos=[0.5,0,0], size=[1,0.2,0.2])
-		pyrosim.Send_Joint(name="Torso_RightLeg", parent="Torso", child="RightLeg", type="revolute", position=[0.5,0,1], jointAxis= "0 1 0")
+		pyrosim.Send_Joint(name="Torso_RightLeg", parent="Torso", child="RightLeg", type="revolute", position=[0.5,0,1], jointAxis= "1 0 0")
 		
 		pyrosim.Send_Joint(name="RightLeg_RightLowerLeg", parent="RightLeg", child="RightLowerLeg", type="revolute", position=[1,0,0], jointAxis= "1 0 0")
 		

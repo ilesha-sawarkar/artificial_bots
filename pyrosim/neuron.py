@@ -81,8 +81,8 @@ class NEURON:
         self.Set_Value(0.0)
         
         for synapse in synapses:
-            current_synapse_weight = synapses[synapse].Get_Weight()
-            presynaptic_neuron_value = neurons[synapse[0]].Get_Value()
+            #current_synapse_weight = synapses[synapse].Get_Weight()
+            #presynaptic_neuron_value = neurons[synapse[0]].Get_Value()
             
             #print(current_synapse_weight)
             #print(presynaptic_neuron_value)
