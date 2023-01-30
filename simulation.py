@@ -11,12 +11,15 @@ import time
 
 
 class SIMULATION :
-	def __init__(self, directOrGUI):
+	def __init__(self, directOrGUI, solutionID):
 		
 		if directOrGUI == "DIRECT":
 			self.physicsClient = p.connect(p.DIRECT)
-		elif directOrGUI == "GUI":
+			self.time_sleep=0
+		elif directOrGUI == 'GUI':
+			
 			self.physicsClient = p.connect(p.GUI)
+			self.time_sleep=1/10
 		
 		
 		
@@ -24,7 +27,7 @@ class SIMULATION :
 		
 		p.setGravity(0,0,-9.8)
 		self.world = WORLD()
-		self.robot = ROBOT()
+		self.robot = ROBOT(solutionID)
 		#p.loadSDF("world.sdf")		
 		pyrosim.Prepare_To_Simulate(self.robot.robotId)
 		self.robot.Prepare_To_Sense()
@@ -42,7 +45,7 @@ class SIMULATION :
 			self.robot.Think()
 			self.robot.Act(i)
 			# step time
-			time.sleep(1/10)
+			time.sleep(self.time_sleep)
 			self.robot.Save_Values()#	
 	
 	def Get_Fitness(self):

@@ -13,12 +13,14 @@ import random
 
 iter=100 #iteration times
 
+populationSize= 10
+
 
 targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 #targetAngles= (targetAngles/2)*(np.pi/2)
 
 
-numberOfGenerations=2
+numberOfGenerations=10
 
 #FrontLeg 
 amplitude_FrontLeg= np.pi/4
