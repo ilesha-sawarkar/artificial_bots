@@ -86,7 +86,8 @@ class ROBOT :
 		#print(xCoordinateOfLinkZero)
 		#print(self.solutionID)
 		#solutionID=string(self.solutionID)
-		fitness_file = open(f"data/tmp{self.solutionID}.txt", "w")
+		fitness_file = open(f"./data/tmp{self.solutionID}.txt", "w")
 		fitness_file.write(str(xCoordinateOfLinkZero))
-		os.system(f"mv data/tmp{self.solutionID}.txt data/fitness{self.solutionID}.txt")
+		fitness_file.close()
+		os.system(f"mv ./data/tmp{self.solutionID}.txt ./data/fitness{self.solutionID}.txt")
 				

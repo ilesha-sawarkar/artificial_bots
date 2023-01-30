@@ -13,7 +13,7 @@ class SOLUTION :
 		#print(self.weights)
 		#exit()
 		
-	def Evaluate(self,directOrGui ):
+	def Evaluate(self,directOrGui):
 		self.Create_World()
 		self.Create_Body()
 		self.Create_Brain()
@@ -21,14 +21,19 @@ class SOLUTION :
 		
 		#os.system("python3 simulate.py " + directOrGui + " & ")
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
-				time.sleep(0.01)
+			time.sleep(0.01)
 		fit_file = open(f"data/fitness{self.myID}.txt", "r")
 		#fit_file = open(f"data/fitness{self.myID}.txt", "r")
 		fitness = fit_file.read()
-		self.fitness = float(fitness)	
+		print('Fitness: ', fitness)
+		#if fitness == '':
+			# print(f"Waiting on {self.myID}")
+		#	time.sleep(0.1)
+		#	fitness = fit_file.read()
+		self.fitness = float(fitness)
 		os.system(f"rm data/fitness{self.myID}.txt")
 		print(self.fitness)
-	
+#	
 	def Set_ID(self):
 		self.myID += 1
 		
@@ -42,10 +47,12 @@ class SOLUTION :
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
 			time.sleep(0.01)
 		fit_file = open(f"data/fitness{self.myID}.txt", "r")
-		self.fitness = float(fit_file.read())
-		print('Fitness: ', self.fitness)
-		
+		fitness = fit_file.readlines()
+		self.fitness = float(fitness[0])
 		os.system(f"rm data/fitness{self.myID}.txt")
+		print(self.fitness)
+		
+		
 		#print(self.fitness)
 	
 	def Mutate(self):

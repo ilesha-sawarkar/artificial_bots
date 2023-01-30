@@ -46,6 +46,7 @@ class PARALLEL_HILL_CLIMBER :
 		self.Mutate()
 		self.Evaluate(self.children)
 		self.Print()
+		self.Select()
 		
 #		self.child.Evaluate("GUI")
 #		print(self.parent.fitness,self.child.fitness )
@@ -83,11 +84,11 @@ class PARALLEL_HILL_CLIMBER :
 				
 	def Show_Best(self):
 		
-		currmin = float('inf')
-		reverse = {}
-		for i in self.parents:
-			reverse[self.parents[i].fitness] = self.parents[i]
-			if self.parents[i].fitness < currmin:
-				currparent = self.parents[i]
-				currmin = self.parents[i].fitness
-		self.parent.Evaluate("GUI")
+		min_fitness = 0
+		best_parent = self.parents[0]
+		for key, parent in self.parents.items():
+			if parent.fitness < min_fitness:
+				min_fitness = parent.fitness
+				best_parent = parent
+		print('HEREEEE')
+		best_parent.Start_Simulation("GUI")
