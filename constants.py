@@ -22,6 +22,12 @@ targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 
 numberOfGenerations=10
 
+numSensorNeurons=4
+numMotorNeurons=3
+
+
+motorJointRange=0.2
+
 #FrontLeg 
 amplitude_FrontLeg= np.pi/4
 frequency_FrontLeg=10
