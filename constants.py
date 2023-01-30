@@ -11,12 +11,14 @@ import math
 import random
 
 
-iter=1000 #iteration times
+iter=100 #iteration times
 
 
 targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 #targetAngles= (targetAngles/2)*(np.pi/2)
 
+
+numberOfGenerations=2
 
 #FrontLeg 
 amplitude_FrontLeg= np.pi/4
