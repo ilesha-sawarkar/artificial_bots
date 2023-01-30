@@ -42,7 +42,7 @@ class SIMULATION :
 			self.robot.Think()
 			self.robot.Act(i)
 			# step time
-			time.sleep(1/10)
+			time.sleep(1/60)
 			self.robot.Save_Values()#	
 	
 	def Get_Fitness(self):

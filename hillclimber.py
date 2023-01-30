@@ -18,7 +18,8 @@ class HILL_CLIMBER :
 		self.Spawn()
 		self.Mutate()
 		self.child.Evaluate("GUI")
-		print(self.parent.fitness,self.child.fitness )
+		self.Print()
+		#print(self.parent.fitness,self.child.fitness )
 		self.Select()
 	
 	def Spawn(self):
@@ -32,11 +33,12 @@ class HILL_CLIMBER :
 		#exit()
 		
 	def Select(self):
-		print('Fitness')
-		print('Parent: ',self.parent.fitness)
-		print('Child: ',self.child.fitness)
+		
 		if self.parent.fitness > self.child.fitness:
 				self.parent = self.child
 			
 	def Show_Best(self):
 		self.parent.Evaluate("GUI")
+		
+	def Print(self):
+		print(self.parent.fitness, self.child.fitness)
