@@ -41,7 +41,7 @@ class SOLUTION :
 		self.Create_World()
 		self.Create_Body()
 		self.Create_Brain()
-		os.system(f"python3 simulate.py {directOrGui} {self.myID} &")
+		os.system(f"python3 simulate.py {directOrGui} {self.myID} 2&>1 &")
 	
 	def Wait_For_Simulation_To_End(self):
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
@@ -49,6 +49,7 @@ class SOLUTION :
 		fit_file = open(f"data/fitness{self.myID}.txt", "r")
 		fitness = fit_file.readlines()
 		self.fitness = float(fitness[0])
+		fit_file.close()
 		os.system(f"rm data/fitness{self.myID}.txt")
 		print(self.fitness)
 		
@@ -65,7 +66,7 @@ class SOLUTION :
 		
 		pyrosim.Start_SDF("world.sdf")
 		
-		pyrosim.Send_Cube(name="Box", pos=[1,1, 1] , size=[1, 1, 1])
+		#pyrosim.Send_Cube(name="Box", pos=[1,1, 1] , size=[1, 1, 1])
 		
 		pyrosim.End()
 		
@@ -88,12 +89,12 @@ class SOLUTION :
 		pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
 		pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
 		pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_FrontLeg")
-		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 3 , weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 3 , weight = 1.0 )
-		# add more synapses and weights
-		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 4, weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 0, targetNeuronName = 4 , weight = 1.0 )
+#		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 3 , weight = 1.0 )
+#		pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 3 , weight = 1.0 )
+#		# add more synapses and weights
+#		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 4, weight = 1.0 )
+#		pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = 1.0 )
+#		pyrosim.Send_Synapse( sourceNeuronName = 0, targetNeuronName = 4 , weight = 1.0 )
 		
 		for currentRow in range(3):
 			for currentColumn in range(2):
@@ -101,7 +102,8 @@ class SOLUTION :
 					sourceNeuronName = currentRow , 
 					targetNeuronName = currentColumn+3 , 
 					#weight = random.uniform(-1,1),
-					weight = self.weights[currentRow][currentColumn] )				
+					weight = self.weights[currentRow][currentColumn] )	
+				
 				
 		pyrosim.End()
 

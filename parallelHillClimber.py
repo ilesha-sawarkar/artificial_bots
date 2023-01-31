@@ -18,14 +18,16 @@ class PARALLEL_HILL_CLIMBER :
 		for i in range(c.populationSize):
 				self.parents[i] = SOLUTION(self.nextAvailableID)
 				self.nextAvailableID += 1
-		print(self.parents)
+		
 		
 	def Evolve(self):
 		self.Evaluate(self.parents)
 		
 		for currentGeneration in range(c.numberOfGenerations):
 			self.Evolve_For_One_Generation()
-			#for key, parent in self.parents.items():
+			
+		self.Show_Best()
+		#for key, parent in self.parents.items():
 		#		parent.Evaluate("GUI")
 	
 			
@@ -54,11 +56,10 @@ class PARALLEL_HILL_CLIMBER :
 		
 	def Spawn(self):
 		self.children = {}
-		for parent in self.parents:
-			currchild = copy.deepcopy(self.parents[parent])
-			self.children[parent] = currchild
-			self.children[parent].Set_ID()
-			self.nextAvailableID += 2
+		for key, parent in self.parents.items():
+			self.children[key] = copy.deepcopy(parent)
+			self.children[key].myID = self.nextAvailableID
+			self.nextAvailableID += 1
 			#self.children={}
 			#for key, parent in self.parents.items():
 		#	print(key, parent)
@@ -69,8 +70,8 @@ class PARALLEL_HILL_CLIMBER :
 		#	self.nextAvailableID += 1
 			
 	def Mutate(self):
-		for i in self.children:
-			self.children[i].Mutate()
+		for key, child in self.children.items():
+			child.Mutate()
 			#self.child.Mutate()
 		#print('\n Mutate')
 		#print(self.parent.weights)
@@ -78,7 +79,7 @@ class PARALLEL_HILL_CLIMBER :
 		#exit()
 		
 	def Select(self):
-		for i in self.children:
+		for i in self.parents:
 			if self.parents[i].fitness > self.children[i].fitness:
 				self.parents[i] = self.children[i]	
 				
@@ -90,5 +91,7 @@ class PARALLEL_HILL_CLIMBER :
 			if parent.fitness < min_fitness:
 				min_fitness = parent.fitness
 				best_parent = parent
-		print('HEREEEE')
+		print('Showing BEST Simulation')
+		print(best_parent)
+		
 		best_parent.Start_Simulation("GUI")

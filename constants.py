@@ -11,7 +11,7 @@ import math
 import random
 
 
-iter=100 #iteration times
+iter=1000 #iteration times
 
 populationSize= 10
 
@@ -23,16 +23,16 @@ targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 numberOfGenerations=10
 
 #FrontLeg 
-amplitude_FrontLeg= np.pi/4
+amplitude_FrontLeg= np.pi/3
 frequency_FrontLeg=10
 phaseOffset_FrontLeg=0
 targetAngles_FrontLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_FrontLeg=22
+maxForce_FrontLeg=25
 
 
-amplitude_BackLeg= np.pi/7
-frequency_BackLeg=12
-phaseOffset_BackLeg= np.pi/6
+amplitude_BackLeg= np.pi/3
+frequency_BackLeg=10
+phaseOffset_BackLeg= np.pi/4
 targetAngles_BackLeg = np.sin(np.linspace(0, np.pi*2, iter))
 maxForce_BackLeg=22
 
