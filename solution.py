@@ -22,7 +22,7 @@ class SOLUTION :
 		
 		#os.system("python3 simulate.py " + directOrGui + " & ")
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
-				time.sleep(0.01)
+				time.sleep(0.001)
 		fit_file = open(f"data/fitness{self.myID}.txt", "r")
 		#fit_file = open(f"data/fitness{self.myID}.txt", "r")
 		fitness = fit_file.read()
@@ -50,7 +50,7 @@ class SOLUTION :
 			fitness = fit_file.read()
 		self.fitness = float(fitness)
 		print('Fitness: ', self.fitness)
-		
+		fit_file.close()
 		os.system(f"rm data/fitness{self.myID}.txt")
 		#print(self.fitness)
 	
@@ -82,11 +82,9 @@ class SOLUTION :
 		
 		pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5,0,0], size=[1,0.2,0.2])
 		
-		pyrosim.Send_Joint(name="Torso_LeftLeg", parent="Torso", child="LeftLeg", type="revolute", position=[-0.5,0,1], jointAxis= "1 0 0")
-		pyrosim.Send_Joint(name="LeftLeg_LeftLowerLeg", parent="LeftLeg", child="LeftLowerLeg", type="revolute", position=[-1,0,0], jointAxis= "1 0 0")
+		pyrosim.Send_Joint(name="Torso_LeftLeg", parent="Torso", child="LeftLeg", type="revolute", position=[-0.5,0,1], jointAxis= "0 1 0")
+		pyrosim.Send_Joint(name="LeftLeg_LeftLowerLeg", parent="LeftLeg", child="LeftLowerLeg", type="revolute", position=[-1,0,0], jointAxis= "0 1 0")
 		pyrosim.Send_Cube(name="LeftLowerLeg", pos=[0,0,-0.5], size=[0.2,0.2,1])
-		
-		
 		
 		
 		
@@ -105,9 +103,9 @@ class SOLUTION :
 		
 		
 		pyrosim.Send_Cube(name="RightLeg", pos=[0.5,0,0], size=[1,0.2,0.2])
-		pyrosim.Send_Joint(name="Torso_RightLeg", parent="Torso", child="RightLeg", type="revolute", position=[0.5,0,1], jointAxis= "1 0 0")
+		pyrosim.Send_Joint(name="Torso_RightLeg", parent="Torso", child="RightLeg", type="revolute", position=[0.5,0,1], jointAxis= "0 1 0")
 		
-		pyrosim.Send_Joint(name="RightLeg_RightLowerLeg", parent="RightLeg", child="RightLowerLeg", type="revolute", position=[1,0,0], jointAxis= "1 0 0")
+		pyrosim.Send_Joint(name="RightLeg_RightLowerLeg", parent="RightLeg", child="RightLowerLeg", type="revolute", position=[1,0,0], jointAxis= "0 1 0")
 		
 		pyrosim.Send_Cube(name="RightLowerLeg", pos=[0,0,-0.5], size=[0.2,0.2,1])
 		
@@ -119,14 +117,24 @@ class SOLUTION :
 		pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
 		pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
 		pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
-		pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
-		pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_FrontLeg")
-		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 3 , weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 3 , weight = 1.0 )
-		# add more synapses and weights
-		pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 4, weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = 1.0 )
-		pyrosim.Send_Synapse( sourceNeuronName = 0, targetNeuronName = 4 , weight = 1.0 )
+		pyrosim.Send_Sensor_Neuron(name = 3 , linkName = "RightLowerLeg")
+		pyrosim.Send_Sensor_Neuron(name = 4 , linkName = "RightLeg")
+		pyrosim.Send_Sensor_Neuron(name = 5, linkName = "FrontLowerLeg")
+		pyrosim.Send_Sensor_Neuron(name = 6 , linkName = "BackLowerLeg")
+		pyrosim.Send_Sensor_Neuron(name = 7 , linkName = "LeftLeg")
+		pyrosim.Send_Sensor_Neuron(name = 8, linkName = "LeftLowerLeg")
+		
+		
+		pyrosim.Send_Motor_Neuron( name = 9 , jointName = "Torso_BackLeg")
+		pyrosim.Send_Motor_Neuron( name = 10 , jointName = "Torso_FrontLeg")
+		pyrosim.Send_Motor_Neuron( name = 11 , jointName = "FrontLeg_FrontLowerLeg")
+		pyrosim.Send_Motor_Neuron( name = 12 , jointName = "RightLeg_RightLowerLeg")
+		pyrosim.Send_Motor_Neuron( name = 13, jointName = "BackLeg_BackLowerLeg")
+		pyrosim.Send_Motor_Neuron( name = 14, jointName = "RightLeg_RightLowerLeg")
+		
+		pyrosim.Send_Motor_Neuron( name = 15, jointName = "Torso_RightLeg")
+		pyrosim.Send_Motor_Neuron( name = 16 , jointName = "Torso_LeftLeg")
+
 		
 		for currentRow in range(c.numSensorNeurons):
 			for currentColumn in range(c.numMotorNeurons):
@@ -134,8 +142,8 @@ class SOLUTION :
 					sourceNeuronName = currentRow , 
 					targetNeuronName = currentColumn+c.numSensorNeurons , 
 					#weight = random.uniform(-1,1),
-					weight = self.weights[currentRow][currentColumn] )				
-				
+					weight = self.weights[currentRow][currentColumn] )	
+		
 		pyrosim.End()
 
 		
