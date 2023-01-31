@@ -26,21 +26,21 @@ numSensorNeurons=9
 numMotorNeurons=8
 
 
-motorJointRange=0.2
+motorJointRange=0.3
 
 #FrontLeg 
-amplitude_FrontLeg= np.pi/4
+amplitude_FrontLeg= np.pi/3
 frequency_FrontLeg=10
 phaseOffset_FrontLeg=0
 targetAngles_FrontLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_FrontLeg=20
+maxForce_FrontLeg=28
 
 
-amplitude_BackLeg= np.pi/7
-frequency_BackLeg=12
-phaseOffset_BackLeg= np.pi/6
+amplitude_BackLeg= np.pi/3
+frequency_BackLeg=19
+phaseOffset_BackLeg= np.pi/4
 targetAngles_BackLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_BackLeg=20
+maxForce_BackLeg=35
 
 #FrontLeg 
 

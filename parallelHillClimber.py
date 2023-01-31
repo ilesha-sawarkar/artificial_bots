@@ -35,6 +35,7 @@ class PARALLEL_HILL_CLIMBER :
 		for i in self.parents:
 			print(f'parent fitness {self.parents[i].fitness} child fitness {self.children[i].fitness}')
 		print("\n")
+		
 	def Evaluate(self,solutions, mode):
 		for i in range(c.populationSize):
 			solutions[i].Start_Simulation(mode)
@@ -72,8 +73,8 @@ class PARALLEL_HILL_CLIMBER :
 		#	self.nextAvailableID += 1
 			
 	def Mutate(self):
-		for i in self.children:
-			self.children[i].Mutate()
+		for key, child in self.children.items():
+			child.Mutate()
 			#self.child.Mutate()
 		#print('\n Mutate')
 		#print(self.parent.weights)
@@ -81,7 +82,7 @@ class PARALLEL_HILL_CLIMBER :
 		#exit()
 		
 	def Select(self):
-		for i in self.children:
+		for i in self.parents:
 			if self.parents[i].fitness > self.children[i].fitness:
 				self.parents[i] = self.children[i]	
 				
