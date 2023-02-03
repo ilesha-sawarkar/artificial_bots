@@ -13,14 +13,14 @@ import random
 
 iter=1000 #iteration times
 
-populationSize= 10
+populationSize= 5
 
 
 targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 #targetAngles= (targetAngles/2)*(np.pi/2)
 
 
-numberOfGenerations=10
+numberOfGenerations=5
 
 numSensorNeurons=9
 numMotorNeurons=8
