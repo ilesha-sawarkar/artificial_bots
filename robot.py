@@ -76,14 +76,11 @@ class ROBOT :
 			#self.motors[jointName] = sensor.MOTOR(jointName)
 	
 	def Get_Fitness(self):
-		basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
-		basePosition = basePositionAndOrientation[0]
-		xPosition = basePosition[0]
-		#stateOfLinkZero = p.getLinkState(self.robotId,0)    
-		#positionOfLinkZero = stateOfLinkZero[0]
-		#xCoordinateOfLinkZero = positionOfLinkZero[0]
+		stateOfLinkZero = p.getLinkState(self.robotId,0)    
+		positionOfLinkZero = stateOfLinkZero[0]
+		xCoordinateOfLinkZero = positionOfLinkZero[0]
 		fitness_file = open(f"data/tmp{self.solutionID}.txt", "w")
-		fitness_file.write(str(xPosition))
+		fitness_file.write(str(xCoordinateOfLinkZero))
 		
 		os.system(f"mv data/tmp{self.solutionID}.txt data/fitness{self.solutionID}.txt")
 		fitness_file.close()
