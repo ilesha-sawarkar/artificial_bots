@@ -150,7 +150,7 @@ def Create_Brain():
 	pyrosim.Send_Motor_Neuron( name = 20 , jointName = "Head_joint")
 	
 	pyrosim.Send_Motor_Neuron( name = 21 , jointName = "Torso_FrontLeftLeg")
-	pyrosim.Send_Motor_Neuron( name = 22 , jointName = "FrontLowerLeftLeg")
+	pyrosim.Send_Motor_Neuron( name = 22 , jointName = "Lower_FrontLeftLeg")
 	pyrosim.Send_Motor_Neuron( name = 23 , jointName = "Torso_FrontRightLeg")
 	pyrosim.Send_Motor_Neuron( name = 24 , jointName = "FrontLowerRightLeg")
 	

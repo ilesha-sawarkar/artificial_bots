@@ -5,29 +5,21 @@ class GEOMETRY_URDF:
     def __init__(self,size, objectType):
 
         self.depth   = 3
+        
+        if objectType=='box':
 
-        self.string1 = '<geometry>'
-        
-        
-        if objectType == 'box':
-            #print(objectType)
+            self.string1 = '<geometry>'
             
             sizeString = str(size[0]) + " " + str(size[1]) + " " + str(size[2])
             
             self.string2 = '    <box size="' + sizeString + '" />'
-            
-            
-        elif objectType == 'sphere':
-            
+        else:
+                
             sizeString = str(size[0])
             
+            self.string1 = '<geometry>'
+            
             self.string2 = '    <sphere radius="' + sizeString + '" />'
-            
-        else :
-            sizeString = str(size[0]) + " " + str(size[1]) #+ " " + str(size[2]) 
-            
-            self.string2 = '    <cylinder size="' + sizeString + '" />'
-            
 
         self.string3 = '</geometry>'
 

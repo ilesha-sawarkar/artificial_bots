@@ -11,35 +11,35 @@ import math
 import random
 
 
-iter=100 #iteration times
+iter=1000 #iteration times
 
-populationSize= 1
+populationSize= 5
 
 
 targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
 #targetAngles= (targetAngles/2)*(np.pi/2)
 
 
-numberOfGenerations= 1
-numSensorNeurons=19
-numMotorNeurons=18
+numberOfGenerations= 5
+numSensorNeurons=17
+numMotorNeurons=16
 
 
-motorJointRange=0.2
+motorJointRange=0.4
 
 #FrontLeg 
 amplitude_FrontLeg= np.pi/7
 frequency_FrontLeg=10
 phaseOffset_FrontLeg=0
 targetAngles_FrontLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_FrontLeg=20
+maxForce_FrontLeg=30
 
 
 amplitude_BackLeg= np.pi/7
 frequency_BackLeg=19
-phaseOffset_BackLeg= 0
+phaseOffset_BackLeg= np.pi/3
 targetAngles_BackLeg = np.sin(np.linspace(0, np.pi*2, iter))
-maxForce_BackLeg=20
+maxForce_BackLeg=30
 
 #FrontLeg 
 

@@ -117,14 +117,7 @@ for i in range (0,1000):
 		#random.randrange(int(-math.pi/2),int(math.pi/2)),
 		maxForce = 20)
 
-
-	pyrosim.Set_Motor_For_Joint(robotId,
-		jointName = "FrontLowerLeftLeg",
-		controlMode = p.POSITION_CONTROL,
-		targetPosition = targetAngles_Lower_FrontLeg_L[i],
-		#random.randrange(int(-math.pi/2),int(math.pi/2)),
-		maxForce = 20)
-
+\
 	
 	pyrosim.Set_Motor_For_Joint(robotId,
 		jointName = "Torso_FrontRightLeg",
