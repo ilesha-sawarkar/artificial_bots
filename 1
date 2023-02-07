@@ -1,6 +1,6 @@
 pybullet build time: Jan  9 2023 10:53:25
-['simulate.py', 'GUI', '4', '2']
-4
+['simulate.py', 'GUI', '1', '2']
+1
 Version = 4.1 Metal - 76.3
 Vendor = Apple
 Renderer = Apple M1 Pro
@@ -12,11 +12,27 @@ MotionThreadFunc thread started
 b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
 
 b3Printf: expected a world element, continuing without it.
+Traceback (most recent call last):
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/simulate.py", line 22, in <module>
+    simulation.Run()
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/simulation.py", line 44, in Run
+    self.robot.Sense(i)
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/robot.py", line 39, in Sense
+    self.sensors[linkName].Get_Value(time)
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/sensor.py", line 14, in Get_Value
+    self.values[time] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/pyrosim/pyrosim.py", line 53, in Get_Touch_Sensor_Value_For_Link
+    for pt in pts:
+TypeError: 'NoneType' object is not iterable
+Exception ignored in: <function SIMULATION.__del__ at 0x7fac70080dc0>
+Traceback (most recent call last):
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/simulation.py", line 38, in __del__
+pybullet.error: Not connected to physics server.
 numActiveThreads = 0
 stopping threads
-destroy semaphore
-semaphore destroyed
 Thread with taskId 0 exiting
 Thread TERMINATED
+destroy semaphore
+semaphore destroyed
 destroy main semaphore
 main semaphore destroyed
