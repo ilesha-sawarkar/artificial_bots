@@ -47,11 +47,13 @@ class ROBOT :
 			self.motors[jointName] = MOTOR(jointName)
 			self.motors[jointName].Prepare_To_Act()
 			self.motors[jointName].Set_Value(self.robotId, i)
+			
 			#print(c.am[i])
 			i=i+1
 		
 		
 	def Act(self,t):
+		print('Here')
 		for neuronName in self.nn.Get_Neuron_Names():
 			if self.nn.Is_Motor_Neuron(neuronName):
 				jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)    
@@ -63,7 +65,7 @@ class ROBOT :
 	
 	def Think(self):
 		self.nn.Update()
-		#self.nn.Print()
+		self.nn.Print()
 		
 		
 	def Save_Values(self):
@@ -76,11 +78,11 @@ class ROBOT :
 			#self.motors[jointName] = sensor.MOTOR(jointName)
 	
 	def Get_Fitness(self):
-		stateOfLinkZero = p.getLinkState(self.robotId,0)    
-		positionOfLinkZero = stateOfLinkZero[0]
-		xCoordinateOfLinkZero = positionOfLinkZero[0]
+		basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
+		basePosition = basePositionAndOrientation[0]
+		xPosition = basePosition[0]
 		fitness_file = open(f"data/tmp{self.solutionID}.txt", "w")
-		fitness_file.write(str(xCoordinateOfLinkZero))
+		fitness_file.write(str(xPosition))
 		
 		os.system(f"mv data/tmp{self.solutionID}.txt data/fitness{self.solutionID}.txt")
 		fitness_file.close()
