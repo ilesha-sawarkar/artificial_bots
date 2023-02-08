@@ -16,7 +16,7 @@ def Create_World():
 	pyrosim.Start_SDF("world.sdf")
 	#pyrosim.Send_Sphere(name="BowlingBall" , pos=[-3,+3,0.5] , size=[0.5])
 	#pyrosim.Send_Cylinder(name='Cyli', pos=[-3,+3,0.5] , size=[1,0.5])
-	pyrosim.Send_Sphere(name="Head_circle" , pos=[-3,5,0.5] , size=[0.5])
+	pyrosim.Send_Sphere(name="Head_circle" , pos=[-3,5,0.5] , size=[0.5], mass=0.2)
 	#pyrosim.Send_Cube(name="Box", pos=[x,y, z] , size=[length, width, height])
 
 	#x=2
@@ -40,21 +40,21 @@ def Generate_Body():
 	
 def Create_Body():
 	pyrosim.Start_URDF("body.urdf")
-	pyrosim.Send_Sphere(name="Head" , pos=[0,0,1.2] , size=[0.3])
+	pyrosim.Send_Sphere(name="Head" , pos=[0,0,1.2] , size=[0.3], mass=0.2, material_name="Cyan")
 	
 	
 	
-	pyrosim.Send_Cube(name="Upper_Body", pos=[0,0,1], size=[0.5,0.8,0.8])
+	pyrosim.Send_Cube(name="Upper_Body", pos=[0,0,1], size=[0.5,0.8,0.8], rpy="0 1 0")
 	
 	
 	
-	pyrosim.Send_Cube(name="Torso", pos=[0,0,1], size=[1,1,1])
+	pyrosim.Send_Cube(name="Torso", pos=[0,0,1], size=[1,1,1], mass=0.5, rpy="0 0 1")
 	pyrosim.Send_Joint(name="Torso_UpperBody", parent="Torso", child="Upper_Body", type="fixed", position=[0,0, 0.5], jointAxis= "1 0 0")
 	pyrosim.Send_Joint(name="Head_joint", parent="Upper_Body", child="Head", type="spherical", position=[0,0, 0.4], jointAxis= "1 0 0")
 	
 	
 		
-	pyrosim.Send_Cube(name="FrontLeftLeg", pos=[0.3,0.5,-0.3], size=[0.2,1,0.2])
+	pyrosim.Send_Cube(name="FrontLeftLeg", pos=[0.3,0.5,-0.3], size=[0.2,1,0.2], rpy="0 10")
 	pyrosim.Send_Joint(name="Torso_FrontLeftLeg", parent="Torso", child="FrontLeftLeg", type="revolute", position=[0,0.5,1], jointAxis= "1 0 0")
 	pyrosim.Send_Joint(name="FrontLeftLeg_FrontLowerLeftLeg", parent="FrontLeftLeg", child="Lower_FrontLeftLeg", type="revolute", position=[0,1,0], jointAxis= "1 0 0")
 	pyrosim.Send_Cube(name="Lower_FrontLeftLeg", pos=[0.3,0,-0.8], size=[0.2,0.2,0.8])
