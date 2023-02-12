@@ -45,7 +45,8 @@ def End_Model():
 def Get_Touch_Sensor_Value_For_Link(linkName):
 
     touchValue = -1.0
-    #print(linkNamesToIndices)
+    print(linkNamesToIndices)
+    print(linkName)
     desiredLinkIndex = linkNamesToIndices[linkName]
 
     pts = p.getContactPoints()
@@ -146,9 +147,15 @@ def Send_Sphere(name="default",pos=[0,0,0],size=[0.5], mass=1.0, rpy= "0 0 0", m
         
     Send_Link(name,pos,size,"sphere", mass, rpy, material_name, rgba )    
     
-def Send_Cylinder(name="default",pos=[0,0,0],size=[1,1]):
-    Send_Link(name,pos,size,"cylinder")    
-    
+def Send_Capsule(name="default",pos=[0,0,0], size=[2,1.0,0.5],mass=1.0, rpy= "0 0 0", material_name="Cyan", rgba= "0 1.0 1.0 1.0"):
+    print('Capsule')
+    print(size)
+    print(material_name, rgba)
+    Send_Link(name,pos,size,"capsule" , mass, rpy, material_name, rgba ) 
+def Send_Cone(name="default",pos=[0,0,0], size=[2,1.0,],mass=1.0, rpy= "0 0 0", material_name="Cyan", rgba= "0 1.0 1.0 1.0"):
+    print(size)
+    print(material_name, rgba)
+    Send_Link(name,pos,size,"cone" , mass, rpy, material_name, rgba ) 
     
 
 def Send_Joint(name,parent,child,type,position, jointAxis):

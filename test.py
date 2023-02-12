@@ -90,11 +90,11 @@ phaseOffset_BackLeg=np.pi/4
 for i in range (0,1000):
 	p.stepSimulation()
 	
-	
-	frontLeg_L = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeftLeg")
-	Lower_frontLeg_L = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLowerRightLeg")
-	#print(Lower_frontLeg_L)
-	frontLeg_R = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontRightLeg")
+#	
+#	frontLeg_L = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeftLeg")
+#	Lower_frontLeg_L = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLowerRightLeg")
+#	#print(Lower_frontLeg_L)
+#	frontLeg_R = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontRightLeg")
 	#Lower_frontLeg_R = pyrosim.Get_Touch_Sensor_Value_For_Link("Lower_FrontRightLeg")
 	
 #	backLeg = pyrosim.Get_Touch_Sensor_Value_For_Link("Lower_BackLeftLeg2")
@@ -110,22 +110,22 @@ for i in range (0,1000):
 	##frontLegSensorValues_R[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontRightLeg")
 	#Lower_frontLegSensorValues_R[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("Lower_FrontRightLeg2")
 	
-	pyrosim.Set_Motor_For_Joint(robotId,
-		jointName = "Torso_FrontLeftLeg",
-		controlMode = p.POSITION_CONTROL,
-		targetPosition = targetAngles_FrontLeg_L[i],
-		#random.randrange(int(-math.pi/2),int(math.pi/2)),
-		maxForce = 20)
-
-\
-	
-	pyrosim.Set_Motor_For_Joint(robotId,
-		jointName = "Torso_FrontRightLeg",
-		controlMode = p.POSITION_CONTROL,
-		targetPosition = targetAngles_FrontLeg_R[i],
-		#random.randrange(int(-math.pi/2),int(math.pi/2)),
-		# +math.pi/4.0,
-		maxForce = 22)
+#	pyrosim.Set_Motor_For_Joint(robotId,
+#		jointName = "Torso_FrontLeftLeg",
+#		controlMode = p.POSITION_CONTROL,
+#		targetPosition = targetAngles_FrontLeg_L[i],
+#		#random.randrange(int(-math.pi/2),int(math.pi/2)),
+#		maxForce = 20)
+#
+#\
+#	
+#	pyrosim.Set_Motor_For_Joint(robotId,
+#		jointName = "Torso_FrontRightLeg",
+#		controlMode = p.POSITION_CONTROL,
+#		targetPosition = targetAngles_FrontLeg_R[i],
+#		#random.randrange(int(-math.pi/2),int(math.pi/2)),
+#		# +math.pi/4.0,
+#		maxForce = 22)
 	
 
 #	

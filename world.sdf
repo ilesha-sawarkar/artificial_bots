@@ -1,9 +1,9 @@
 <sdf>
     <model name="Head_circle">
-        <pose>-3 5 0.5 0 0 0 </pose>
+        <pose>0.5 5 0.5 0 0 0 </pose>
         <link name="Head_circle">
             <inertial>
-                <mass>0.2</mass>
+                <mass>1.0</mass>
                 <inertia>
                     <ixx>0.083</ixx>
                     <ixy>0.0</ixy>
@@ -15,16 +15,16 @@
             </inertial>
             <collision>
                 <geometry>
-                 <sphere>
-                 <radius>0.5</radius>
-                 </sphere>
+                 <capsule>
+                 <size>0.02 0.5 0.2</size>
+                 </capsule>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
-                 <sphere>
-                 <radius>0.5</radius>
-                 </sphere>
+                 <capsule>
+                 <size>0.02 0.5 0.2</size>
+                 </capsule>
                 </geometry>
             </visual>
         </link>

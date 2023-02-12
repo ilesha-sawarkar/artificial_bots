@@ -14,19 +14,28 @@ import random
 iter=1000 #iteration times
 
 populationSize= 2
-
-
-targetAngles = np.sin(np.linspace(0, np.pi*2, iter))
-#targetAngles= (targetAngles/2)*(np.pi/2)
-
-
 numberOfGenerations= 2
-numSensorNeurons=17
-numMotorNeurons=16
-
 
 motorJointRange=0.4
 
+maxLinks=11
+
+color_No_Sensor_Link= 'Blue'
+rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'
+
+
+color_Sensor_Link='Green'
+
+
+rgba_Sensor_Link='0.0 1.0 0.0 1.0'
+numSensorNeurons=10
+numMotorNeurons=9
+
+
+
+
+
+#------------------------
 #FrontLeg 
 amplitude_FrontLeg= np.pi/7
 frequency_FrontLeg=10

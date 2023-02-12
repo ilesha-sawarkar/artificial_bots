@@ -1,4 +1,14 @@
 pybullet build time: Jan  9 2023 10:53:25
 b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
-expected a world element, continuing without it.['simulate.py', 'DIRECT', '3', '2']
-3
+expected a world element, continuing without it.b3Error[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,121]:
+Cannot find parent link for a jointb3Error[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,121]:
+Link0_Link1['simulate.py', 'DIRECT', '1', '2']
+1
+Traceback (most recent call last):
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/simulate.py", line 19, in <module>
+    simulation = SIMULATION(directOrGUI, solutionID)
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/simulation.py", line 30, in __init__
+    self.robot = ROBOT(solutionID)
+  File "/Users/ilesha/AndroidStudioProjects/GITHUB SYNC/artificial_bots/robot.py", line 16, in __init__
+    self.robotId = p.loadURDF("body.urdf")
+pybullet.error: Cannot load URDF file.
