@@ -56,16 +56,18 @@ class SOLUTION :
 		os.system(f"rm data/fitness{self.myID}.txt")
 	
 	def Mutate(self):
+		self.numSensorNeurons=self.sensorNeurons.count(1)
+		self.numMotorNeurons = len(self.motorNeurons)
 		
-		row = random.randint(0,c.numSensorNeurons-1)
-		col = random.randint(0,c.numMotorNeurons-1)
+		row = random.randint(0,self.numSensorNeurons-1)
+		col = random.randint(0,self.numMotorNeurons-1)
 		self.weights[row][col]  =  random.random() * 2 - 1
 	
 	def Create_World(self):
 		
 		pyrosim.Start_SDF("world.sdf")
 		
-		pyrosim.Send_Capsule(name="Head_circle" , pos=[3,5,0.5] , size=[0.02,0.5,1], mass=1.0, material_name='Red', rgba="1.0 0.0 1.0 1.0")
+		#pyrosim.Send_Capsule(name="Head_circle" , pos=[3,5,0.5] , size=[0.02,0.5,1], mass=1.0, material_name='Red', rgba="1.0 0.0 1.0 1.0")
 		
 		pyrosim.End()
 		
@@ -91,7 +93,7 @@ class SOLUTION :
 		length=random.randint(1,2)
 		width=random.randint(1,2)
 		height=random.randint(1,2)
-		list_shapes=['cube', 'sphere']
+		list_shapes=['cube'] #, 'sphere']
 		shape_choice=random.choice(list_shapes)
 		
 		snake_length=0
@@ -126,9 +128,10 @@ class SOLUTION :
 			
 			if i==1:
 				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,old_width/-2,0.5], jointAxis= "0 1 0")
+				self.motorNeurons.append(joint_name)
 			else:
 				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,width/-1,0.5], jointAxis= "0 1 0")
-			self.motorNeurons.append(joint_name)
+				self.motorNeurons.append(joint_name)
 				
 			
 			if self.sensorNeurons[i]==0: #No Sensor
@@ -138,7 +141,7 @@ class SOLUTION :
 				
 			old_width=width+old_width
 				
-					
+		print('MotorNeurons',self.motorNeurons)
 								
 					
 		
@@ -155,18 +158,21 @@ class SOLUTION :
 		print(self.numSensorNeurons,self.numMotorNeurons)
 		print("synapse_weights: ", self.weights)
 						
-#		i=0
-#		for link in self.sensorNeurons:
-#			pyrosim.Send_Sensor_Neuron(name = i, linkName = str(link))
-#			i+=1
-#		for joint in self.motorNeurons:
-#			pyrosim.Send_Motor_Neuron( name = i , jointName = str(joint))
-#			i+=1
-#					
+		i=0
+		for link in self.sensorNeurons:
+			if link==1:
+				pyrosim.Send_Sensor_Neuron(name = i, linkName = "Link"+str(i))
+				i+=1
+				
+		for joint in self.motorNeurons:
+				pyrosim.Send_Motor_Neuron( name = i , jointName = joint)
+				i+=1
+				
 		
-	
-		for currentRow in range(self.numSensorNeurons):
-			for currentColumn in range(self.numMotorNeurons):
+		for currentRow in range(0,self.numSensorNeurons):
+			for currentColumn in range(0, self.numMotorNeurons):
+				#print('CurrentRow',currentRow)
+				#print('CurrentColumn',currentColumn)
 				pyrosim.Send_Synapse( 
 					sourceNeuronName = currentRow , 
 					targetNeuronName = currentColumn+ self.numSensorNeurons , 
