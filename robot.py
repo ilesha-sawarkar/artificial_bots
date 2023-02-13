@@ -23,10 +23,14 @@ class ROBOT :
 		
 		os.system(f"rm brain{self.solutionID}.nndf")
 		#os.system(f"rm body{solutionID}.urdf")
+		pyrosim.Prepare_To_Simulate(self.robotId)
+		self.Prepare_To_Sense()
+		self.Prepare_To_Act()
 
 		
 	def Prepare_To_Sense(self):
 		#self.sensors=SENSOR()
+		
 		for linkName in pyrosim.linkNamesToIndices:
 			#print(self.sensors)
 			self.sensors[linkName] = SENSOR(linkName)
@@ -41,12 +45,12 @@ class ROBOT :
 			#print(linkName)
 
 		
-	def Prepare_To_Act(self, ):
+	def Prepare_To_Act(self):
 		i=0
 		for jointName in pyrosim.jointNamesToIndices:
 			self.motors[jointName] = MOTOR(jointName)
-			self.motors[jointName].Prepare_To_Act()
-			self.motors[jointName].Set_Value(self.robotId, i)
+			#self.motors[jointName].Prepare_To_Act()
+			#self.motors[jointName].Set_Value(self.robotId, i)
 			
 			#print(c.am[i])
 			i=i+1
@@ -55,12 +59,15 @@ class ROBOT :
 	def Act(self,t):
 		#print('Here')
 		for neuronName in self.nn.Get_Neuron_Names():
+			
 			if self.nn.Is_Motor_Neuron(neuronName):
 				jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)    
 				desiredAngle = self.nn.Get_Value_Of(neuronName)*c.motorJointRange   
 				#print(jointName, desiredAngle)
-		
+				
+				#print('Here Motors:',self.motors)
 				self.motors[jointName].Set_Value(self.robotId, desiredAngle)
+				
 				
 	
 	def Think(self):

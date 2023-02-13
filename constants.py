@@ -14,9 +14,9 @@ import random
 iter=1000 #iteration times
 
 populationSize= 2
-numberOfGenerations= 2
+numberOfGenerations= 10
 
-motorJointRange=0.4
+motorJointRange=0.7
 
 maxLinks=11
 

@@ -39,7 +39,7 @@ class SOLUTION :
 		self.Create_World()
 		self.Create_Body()
 		self.Create_Brain()
-		os.system(f"python3 simulate.py {directOrGui} {self.myID}    &")
+		os.system(f"python3 simulate.py {directOrGui} {self.myID}   &")
 	
 	def Wait_For_Simulation_To_End(self):
 		while not os.path.exists(f"data/fitness{self.myID}.txt"):
@@ -76,7 +76,7 @@ class SOLUTION :
 	def Send_Shape(self, shape, name, position, size, mass, color_name, rgba_string):
 		print(shape)
 		if shape=='sphere':
-			radius=[size[0]/2]
+			radius=[size[1]/2] #initializing the random assigned width as radius length
 			print("Sphere :",radius)
 			pyrosim.Send_Sphere(name=name , pos= position, size=radius, mass=mass, material_name=color_name, rgba=rgba_string)
 		elif shape=='cube':
@@ -89,57 +89,60 @@ class SOLUTION :
 	
 	def Create_Body(self):
 		pyrosim.Start_URDF("body.urdf")
+		self.sensorNeurons=[]
+		self.motorNeurons=[]
 				
 		length=random.randint(1,2)
 		width=random.randint(1,2)
 		height=random.randint(1,2)
-		list_shapes=['cube'] #, 'sphere']
+		list_shapes=['cube' , 'sphere']
 		shape_choice=random.choice(list_shapes)
 		
 		snake_length=0
-		number_of_links= random.randint(4,5)
+		number_of_links= random.randint(3,c.maxLinks)
 		
 		self.sensorNeurons= [random.randint(0,1) for _ in range (number_of_links)]
 		print(self.sensorNeurons)
 		
 		print('Snake with links : ', number_of_links)
 		
-		shape_name="Link"+str(0)
+
 		
 		if self.sensorNeurons[0]==0: #No Sensor
-			self.Send_Shape('cube', name=shape_name, position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
+			self.Send_Shape(shape_choice, name="Link0", position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
 		else:
-			self.Send_Shape('cube', name=shape_name, position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
+			self.Send_Shape(shape_choice, name="Link0", position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
 			
+		pyrosim.Send_Joint(name=f"Link0_Link1", parent="Link0", child="Link1", type="revolute", position=[0,width/-2,0.5], jointAxis= "1 0 0")
 		
-		old_width=width
+		self.motorNeurons.append("Link0_Link1")
+		
+		
 		for i in range(1,number_of_links):
 			length=random.randint(1,3)
 			width=random.randint(1,2)
 			height=random.randint(1,2)
 			shape_choice=random.choice(list_shapes)
-			
-			
-			joint_name= "Link"+str(i-1)+'_'+"Link"+str(i)
-			parent_name="Link"+str(i-1)
-			child_name="Link"+str(i)
+			parent_name="Link"+str(i)
+			child_name="Link"+str(i+1)
 			print(child_name,' : ', length, width, height)
-			print('Joint pos:', joint_name,0,old_width,0)
-			
-			if i==1:
-				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,old_width/-2,0.5], jointAxis= "0 1 0")
-				self.motorNeurons.append(joint_name)
-			else:
-				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,width/-1,0.5], jointAxis= "0 1 0")
-				self.motorNeurons.append(joint_name)
-				
+
 			
 			if self.sensorNeurons[i]==0: #No Sensor
-				self.Send_Shape(shape_choice, name=child_name, position=[0,width/-2,height/2], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
+				self.Send_Shape(shape_choice, name=parent_name, position=[0,width/-2,0], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
 			else:
-				self.Send_Shape(shape_choice, name=child_name, position=[0,width/-2,height/2], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
+				self.Send_Shape(shape_choice, name=parent_name, position=[0,width/-2,0], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
 				
-			old_width=width+old_width
+			if i<number_of_links-1:
+				joint_name= "Link"+str(i)+'_'+"Link"+str(i+1)
+				
+				
+				
+				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,width/-1,0.5], jointAxis= "1 0 0")
+				self.motorNeurons.append(joint_name)
+		
+				
+			
 				
 		print('MotorNeurons',self.motorNeurons)
 								
@@ -163,7 +166,8 @@ class SOLUTION :
 			if link==1:
 				pyrosim.Send_Sensor_Neuron(name = i, linkName = "Link"+str(i))
 				i+=1
-				
+		
+		print(self.motorNeurons)
 		for joint in self.motorNeurons:
 				pyrosim.Send_Motor_Neuron( name = i , jointName = joint)
 				i+=1
@@ -171,15 +175,12 @@ class SOLUTION :
 		
 		for currentRow in range(0,self.numSensorNeurons):
 			for currentColumn in range(0, self.numMotorNeurons):
-				#print('CurrentRow',currentRow)
-				#print('CurrentColumn',currentColumn)
+
 				pyrosim.Send_Synapse( 
 					sourceNeuronName = currentRow , 
 					targetNeuronName = currentColumn+ self.numSensorNeurons , 
-					#weight = random.uniform(-1,1),
 					weight = self.weights[currentRow][currentColumn] )	
-				#print(self.weights)
-				#print(self.weights[currentRow][currentColumn] )
+
 		pyrosim.End()
 
 		

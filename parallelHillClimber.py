@@ -21,14 +21,12 @@ class PARALLEL_HILL_CLIMBER :
 		print(self.parents)
 		
 	def Evolve(self):
-		self.Evaluate(self.parents, "DIRECT")
+		self.Evaluate(self.parents, "GUI")
 		
-		for currentGeneration in range(c.numberOfGenerations):
-			self.Evolve_For_One_Generation()
-		self.Show_Best()
-			#for key, parent in self.parents.items():
-		#		parent.Evaluate("GUI")
-	
+#		for currentGeneration in range(c.numberOfGenerations):
+#			self.Evolve_For_One_Generation()
+#		self.Show_Best()
+
 			
 	def Print(self):
 		print("\n")

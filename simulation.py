@@ -29,9 +29,7 @@ class SIMULATION :
 		self.world = WORLD()
 		self.robot = ROBOT(solutionID)
 		#p.loadSDF("world.sdf")		
-		pyrosim.Prepare_To_Simulate(self.robot.robotId)
-		self.robot.Prepare_To_Sense()
-		self.robot.Prepare_To_Act()
+		
 		#Run()
 		
 	def __del__(self):
