@@ -39,7 +39,7 @@
 
 ## 3. Random Shapes Generated
 
-  * The generated morphologies has three types of shapes:
+  * The generated morphologies are made of three types of shapes:
      * Cube
      * Cuboid - *Elongated Cube*
      * Sphere
