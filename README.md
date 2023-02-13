@@ -14,10 +14,10 @@
 
 ## 1.  How To Run The Code 
 
-   To Run The code just Run the program search.py after cloning the repository to your local machine.
+   To run the code just run the program search.py after cloning the repository to your local machine.
 
 
-   Another option is to run the code "python3 search.py" from the terminal or command line window. Run this command after using cd and shifting to cloned repository on your local machine.
+   Another option is to run the code "python3 search.py" from the terminal or command line window. Run this command after using cd and runnning this command from the directory where you have stored your cloned repository on your local machine.
    
 
 
@@ -28,7 +28,7 @@
   * Following which a list of randomly placed 0's and 1's are generated that depict the sensor values of the morphology.
   * Using this information we visually seperate the **links with sensors** as *Green* and the **links without sensors** as *Blue*.
   * **Additionally:**
-    * I have also added a randomization of shapes and dimensions at each link.
+    * I have also added a *randomization of shapes and dimensions* at each link.
     * So a shape of cube and sphere is randomly decided by the random function at each link following which the joints and sensors are added.
     * The dimensions of each shape is also randomly decided at each link.
    
