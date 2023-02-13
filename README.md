@@ -48,6 +48,6 @@
 ## 4. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
 
-## 5. Citations for References used to buil this project
+## 5. References used to build this project
    *  [LudoBots](https://www.reddit.com/r/ludobots/wiki/installation/)
    *  [Pyrosim](https://github.com/jbongard/pyrosim)
