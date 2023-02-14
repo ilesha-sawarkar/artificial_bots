@@ -47,6 +47,7 @@
 
 ## 4. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
+   * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
 
 ## 5. References used to build this project
    *  [LudoBots](https://www.reddit.com/r/ludobots/wiki/installation/)
