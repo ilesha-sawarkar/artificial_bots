@@ -14,6 +14,13 @@ class SOLUTION :
 		self.sensorNeurons=[]
 		self.motorNeurons=[]
 		self.numSensorNeurons = 0
+		self.creature_length_pos=0
+		self.creature_width_pos=0
+		self.creature_height_pos=0
+		self.creature_length_neg=0
+		self.creature_width_neg=0
+		self.creature_height_neg=0
+		
 		
 	def Evaluate(self,directOrGui ):
 		self.Create_World()
@@ -72,11 +79,104 @@ class SOLUTION :
 		pyrosim.End()
 		
 		
+	def Send_Cube_Direction(self, shape_choice,  length, width,height, cube_direction, placement_position):
+		
+		
+		#creature_width=total_creature_size[1]
+		#creature_height=total_creature_size[2]
+		print(cube_direction, ' ', placement_position)
+		z_direction=['up']
+		y_direction=['left','right']
+		x_direction=['left','right']
+		
+		if shape_choice=='sphere':
+			#width=width/2
+			length=width
+			height=width
+			width=width/2
+			
+		
+		if cube_direction=='x':
+			
+			y_choice=random.choice(y_direction)
+			
+			if placement_position=='positive':
+				if y_choice=='left':
+					cube_position=[length/2, 0, height/2]
+					joint_position=[self.creature_length_pos/1,-self.creature_width_neg , self.creature_height_pos]
+					self.creature_length_pos=length
+					self.creature_width_neg=width
+					joint_direction='1 0 0'
+				elif y_choice =='right':
+					cube_position=[length/2, 0, height/2]
+					joint_position=[self.creature_length_pos,self.creature_width_pos , -self.creature_height_neg]
+					self.creature_length_pos=length
+					self.creature_width_pos=width
+					joint_direction='1 0 0'
+				
+			elif placement_position=='negative':
+				if y_choice=='left':
+					cube_position=[length/-2, 0, height/2]
+					joint_position=[-self.creature_length_pos,self.creature_width_neg , self.creature_height_pos]
+					self.creature_length_neg=length
+					self.creature_width_neg=width
+					joint_direction='1 0 0'
+				elif y_choice =='right':
+					cube_position=[length/-2, 0, height/2]
+					joint_position=[-self.creature_length_pos,self.creature_width_pos, -self.creature_height_neg/2]
+					self.creature_length_neg=length
+					self.creature_width_pos=width
+					joint_direction='1 0 0'
+				
+			
+			
+		elif cube_direction=='y':
+			z_choice=random.choice(z_direction)
+			if placement_position=='positive':
+				if z_choice=='up':
+					cube_position=[0, self.creature_width_pos/1,height/2]
+					joint_position=[self.creature_length_pos, width/1,  self.creature_height_pos/2]
+					self.creature_width_pos=width
+					joint_direction='0 1 0'
+				elif z_choice =='down':
+					cube_position=[0, self.creature_width_pos/1,height/2]
+					joint_position=[self.creature_length_pos, width/1,  -self.creature_height_neg/2]
+					self.creature_width_pos=width
+					joint_direction='0 1 0'
+					
+			elif placement_position=='negative':
+				if z_choice=='up':
+					cube_position=[0, self.creature_width_pos/-1, height/2]
+					joint_position=[self.creature_length_neg, width/-1, self.creature_height_pos/2]
+					self.creature_width_neg=width
+					joint_direction='0 1 0'
+				elif z_choice =='down':
+					cube_position=[0, self.creature_width_pos/1,height/2]
+					joint_position=[self.creature_length_neg, width/-1,  -self.creature_height_neg/2]
+					self.creature_width_neg=width
+					joint_direction='0 1 0'
+			
+			
+		elif cube_direction=='z':
+#			if placement_position=='positive':
+				cube_position=[0, 0, height/1.8]
+				joint_position=[self.creature_length_pos,self.creature_width_pos,height/1]
+				self.creature_height_pos=height
+				joint_direction='1 0 0'
+#			elif placement_position=='negative':
+#				cube_position=[0, 0, height/-1.8]
+#				joint_position=[self.creature_length_neg,self.creature_width_neg/1.8,  height/-1]
+#				self.creature_height_neg=height
+#				joint_direction='0 0 1'
+			
+		return cube_position, joint_position, joint_direction
+		
 	
 	def Send_Shape(self, shape, name, position, size, mass, color_name, rgba_string):
 		print(shape)
 		if shape=='sphere':
 			radius=[size[1]/2] #initializing the random assigned width as radius length
+			
 			print("Sphere :",radius)
 			pyrosim.Send_Sphere(name=name , pos= position, size=radius, mass=mass, material_name=color_name, rgba=rgba_string)
 		elif shape=='cube':
@@ -88,7 +188,7 @@ class SOLUTION :
 	
 	
 	def Create_Body(self):
-		pyrosim.Start_URDF("body.urdf")
+		pyrosim.Start_URDF(f"body/body{self.myID}.urdf")
 		self.sensorNeurons=[]
 		self.motorNeurons=[]
 				
@@ -96,26 +196,41 @@ class SOLUTION :
 		width=random.randint(1,2)
 		height=random.randint(1,2)
 		list_shapes=['cube' , 'sphere']
+		block_direction=['x','y', 'z'] #'z',y', , 'negative', 'positive'
+		relative_position=['positive','negative']
+
+
 		shape_choice=random.choice(list_shapes)
+		cube_direction= random.choice(block_direction)
 		
-		snake_length=0
-		number_of_links= random.randint(3,c.maxLinks)
+		placement_position = random.choice(relative_position)
+		
+		number_of_links= random.randint(5,8)#c.maxLinks)
+		
 		
 		self.sensorNeurons= [random.randint(0,1) for _ in range (number_of_links)]
 		print(self.sensorNeurons)
 		
-		print('Snake with links : ', number_of_links)
+		print('Creature with total shapes : ', number_of_links)
+		if shape_choice =='sphere':
+			width=width
 		
-
+		cube_position, joint_position, joint_direction =self.Send_Cube_Direction( shape_choice, length, width, height, cube_direction, placement_position)
 		
 		if self.sensorNeurons[0]==0: #No Sensor
-			self.Send_Shape(shape_choice, name="Link0", position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
-		else:
-			self.Send_Shape(shape_choice, name="Link0", position=[0,0,height/2], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
+			print(shape_choice)
 			
-		pyrosim.Send_Joint(name=f"Link0_Link1", parent="Link0", child="Link1", type="revolute", position=[0,width/-2,0.5], jointAxis= "1 0 0")
+			self.Send_Shape(shape_choice, name="Link0", position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
+		else:
+			self.Send_Shape(shape_choice, name="Link0", position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
+		
+		
+			
+		pyrosim.Send_Joint(name=f"Link0_Link1", parent="Link0", child="Link1", type="revolute", position=joint_position, jointAxis= joint_direction)
 		
 		self.motorNeurons.append("Link0_Link1")
+		
+		total_creature_size= [length, width, height]
 		
 		
 		for i in range(1,number_of_links):
@@ -123,22 +238,35 @@ class SOLUTION :
 			width=random.randint(1,2)
 			height=random.randint(1,2)
 			shape_choice=random.choice(list_shapes)
+			cube_direction= random.choice(block_direction)
+			placement_position = random.choice(relative_position)
+			
 			parent_name="Link"+str(i)
 			child_name="Link"+str(i+1)
 			print(child_name,' : ', length, width, height)
-
+			
+			
+				
+			print(shape_choice)
 			
 			if self.sensorNeurons[i]==0: #No Sensor
-				self.Send_Shape(shape_choice, name=parent_name, position=[0,width/-2,0], size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
+				#pos=[length, width, height]
+				cube_position, joint_position, joint_direction =self.Send_Cube_Direction( shape_choice,length, width, height, cube_direction, placement_position)
+				
+				self.Send_Shape(shape_choice, name=parent_name, position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
+				
 			else:
-				self.Send_Shape(shape_choice, name=parent_name, position=[0,width/-2,0], size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
+				#pos=[length, width, height]
+				cube_position, joint_position, joint_direction =self.Send_Cube_Direction( shape_choice, length, width, height, cube_direction, placement_position)
+				
+				self.Send_Shape(shape_choice, name=parent_name, position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
 				
 			if i<number_of_links-1:
 				joint_name= "Link"+str(i)+'_'+"Link"+str(i+1)
 				
 				
 				
-				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=[0,width/-1,0.5], jointAxis= "1 0 0")
+				pyrosim.Send_Joint(name=joint_name, parent=parent_name, child=child_name, type="revolute", position=joint_position, jointAxis= joint_direction)
 				self.motorNeurons.append(joint_name)
 		
 				
@@ -154,7 +282,7 @@ class SOLUTION :
 		
 
 	def Create_Brain(self):
-		pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
+		pyrosim.Start_NeuralNetwork(f"brain/brain{self.myID}.nndf")
 		self.numSensorNeurons=self.sensorNeurons.count(1)
 		self.numMotorNeurons = len(self.motorNeurons)
 		self.weights = np.random.rand(self.numSensorNeurons,self.numMotorNeurons) * 2 - 1

@@ -11,14 +11,14 @@ import math
 import random
 
 
-iter=1000 #iteration times
+iter=100000 #iteration times
 
-populationSize= 2
-numberOfGenerations= 10
+populationSize= 1
+numberOfGenerations= 20
 
 motorJointRange=0.7
 
-maxLinks=11
+maxLinks=15
 
 color_No_Sensor_Link= 'Blue'
 rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'

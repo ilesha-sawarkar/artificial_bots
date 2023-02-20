@@ -16,5 +16,5 @@ class SENSOR :
 		#print(self.values[time])
 	
 	def Save_Values(self):
-		np.save('sensordata_'+str(self.linkName),self.values)
+		np.save('sensor_motor_data/sensordata_'+str(self.linkName),self.values)
 			

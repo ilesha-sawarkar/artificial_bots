@@ -35,4 +35,4 @@ class MOTOR :
 		maxForce = c.maxForce_BackLeg)
 			
 	def Save_Values(self):
-		np.save('motor_value_'+self.jointName,self.motorValues)
+		np.save('sensor_motor_data/motor_value_'+self.jointName,self.motorValues)

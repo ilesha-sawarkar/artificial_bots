@@ -15,13 +15,15 @@ class SIMULATION :
 		
 		if directOrGUI == "DIRECT":
 			self.physicsClient = p.connect(p.DIRECT)
+			
 			self.time_sleep=0
 		elif directOrGUI == 'GUI':
 			
 			self.physicsClient = p.connect(p.GUI)
-			self.time_sleep=1/1000
+			self.time_sleep=1/60 #1/1000
 		
 		
+		p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
 		
 		p.setAdditionalSearchPath(pybullet_data.getDataPath())
 		
