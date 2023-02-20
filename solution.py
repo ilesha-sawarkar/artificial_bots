@@ -17,6 +17,8 @@ class SOLUTION :
 		self.creature_length_pos=0
 		self.creature_width_pos=0
 		self.creature_height_pos=0
+		self.creature_height_pos_left=0
+		self.creature_height_pos_right=0
 		self.creature_length_neg=0
 		self.creature_width_neg=0
 		self.creature_height_neg=0
@@ -98,76 +100,84 @@ class SOLUTION :
 		
 		if cube_direction=='x':
 			
-			y_choice=random.choice(y_direction)
+			y_choice=random.choice(x_direction)
 			
 			if placement_position=='positive':
 				if y_choice=='left':
 					cube_position=[length/2, 0, height/2]
-					joint_position=[self.creature_length_pos/1,-self.creature_width_neg , self.creature_height_pos]
+					joint_position=[length/1,self.creature_width_pos/2 , self.creature_height_pos]
 					self.creature_length_pos=length
+					self.creature_height_pos_left=height
 					self.creature_width_neg=width
 					joint_direction='1 0 0'
 				elif y_choice =='right':
 					cube_position=[length/2, 0, height/2]
-					joint_position=[self.creature_length_pos,self.creature_width_pos , -self.creature_height_neg]
+					joint_position=[length,-self.creature_width_neg/2 , self.creature_height_pos]
 					self.creature_length_pos=length
+					self.creature_height_pos_right=height
 					self.creature_width_pos=width
 					joint_direction='1 0 0'
 				
 			elif placement_position=='negative':
 				if y_choice=='left':
 					cube_position=[length/-2, 0, height/2]
-					joint_position=[-self.creature_length_pos,self.creature_width_neg , self.creature_height_pos]
+					joint_position=[-length,self.creature_width_pos/2 , self.creature_height_pos]
 					self.creature_length_neg=length
+					self.creature_height_pos_left=height
 					self.creature_width_neg=width
 					joint_direction='1 0 0'
 				elif y_choice =='right':
 					cube_position=[length/-2, 0, height/2]
-					joint_position=[-self.creature_length_pos,self.creature_width_pos, -self.creature_height_neg/2]
+					joint_position=[-length, -self.creature_width_neg/2,self.creature_height_pos]
 					self.creature_length_neg=length
+					self.creature_height_pos_right=height
 					self.creature_width_pos=width
 					joint_direction='1 0 0'
 				
 			
 			
 		elif cube_direction=='y':
-			z_choice=random.choice(z_direction)
+			x_choice=random.choice(x_direction)
 			if placement_position=='positive':
-				if z_choice=='up':
+				if x_choice== 'left':
 					cube_position=[0, self.creature_width_pos/1,height/2]
 					joint_position=[self.creature_length_pos, width/1,  self.creature_height_pos/2]
+					self.creature_length_pos=length
 					self.creature_width_pos=width
 					joint_direction='0 1 0'
-				elif z_choice =='down':
+				elif x_choice =='right':
 					cube_position=[0, self.creature_width_pos/1,height/2]
-					joint_position=[self.creature_length_pos, width/1,  -self.creature_height_neg/2]
+					joint_position=[self.creature_length_pos, width/1,  self.creature_height_pos]
+					self.creature_length_pos=length
 					self.creature_width_pos=width
 					joint_direction='0 1 0'
 					
 			elif placement_position=='negative':
-				if z_choice=='up':
+				if x_choice== 'left':
 					cube_position=[0, self.creature_width_pos/-1, height/2]
-					joint_position=[self.creature_length_neg, width/-1, self.creature_height_pos/2]
+					joint_position=[self.creature_length_neg, width/-1,  self.creature_height_pos]
+					self.creature_length_neg=length
 					self.creature_width_neg=width
 					joint_direction='0 1 0'
-				elif z_choice =='down':
+				elif x_choice == 'right':
 					cube_position=[0, self.creature_width_pos/1,height/2]
-					joint_position=[self.creature_length_neg, width/-1,  -self.creature_height_neg/2]
+					joint_position=[self.creature_length_neg, width/-1,  self.creature_height_pos]
+					self.creature_length_neg=length
 					self.creature_width_neg=width
 					joint_direction='0 1 0'
 			
 			
 		elif cube_direction=='z':
-#			if placement_position=='positive':
+			if placement_position=='positive':
 				cube_position=[0, 0, height/1.8]
 				joint_position=[self.creature_length_pos,self.creature_width_pos,height/1]
 				self.creature_height_pos=height
 				joint_direction='1 0 0'
-#			elif placement_position=='negative':
-#				cube_position=[0, 0, height/-1.8]
-#				joint_position=[self.creature_length_neg,self.creature_width_neg/1.8,  height/-1]
-#				self.creature_height_neg=height
-#				joint_direction='0 0 1'
+			elif placement_position=='negative':
+				cube_position=[0, 0, height/-1.8]
+				joint_position=[self.creature_length_neg,self.creature_width_neg/1.8,  height/-1]
+				self.creature_height_neg=height
+				joint_direction='0 0 1'
 			
 		return cube_position, joint_position, joint_direction
 		
@@ -196,7 +206,7 @@ class SOLUTION :
 		width=random.randint(1,2)
 		height=random.randint(1,2)
 		list_shapes=['cube' , 'sphere']
-		block_direction=['x','y', 'z'] #'z',y', , 'negative', 'positive'
+		block_direction=['x','z'] #'z',y', , 'negative', 'positive'
 		relative_position=['positive','negative']
 
 
@@ -223,7 +233,7 @@ class SOLUTION :
 			self.Send_Shape(shape_choice, name="Link0", position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_No_Sensor_Link, rgba_string=c.rgba_No_Sensor_Link )
 		else:
 			self.Send_Shape(shape_choice, name="Link0", position=cube_position, size=[length, width, height],mass=1.0, color_name=c.color_Sensor_Link, rgba_string=c.rgba_Sensor_Link )
-		
+			#self.creature_height_pos=height
 		
 			
 		pyrosim.Send_Joint(name=f"Link0_Link1", parent="Link0", child="Link1", type="revolute", position=joint_position, jointAxis= joint_direction)
