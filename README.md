@@ -62,9 +62,11 @@
 ## 6. Animation of 3D Creature
    * [Youtube Link](https://youtu.be/iVttcKXFOvs)
    
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/iVttcKXFOvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/iVttcKXFOvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+   
    
    * Example of the 3D Creature generated
+   
    <img width="814" alt="Screenshot 2023-02-20 at 10 16 27 PM" src="https://user-images.githubusercontent.com/114837040/220246470-70a84778-34e6-45b4-a17b-44154798a56f.png">
    
 
