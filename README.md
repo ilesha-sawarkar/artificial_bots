@@ -61,7 +61,7 @@
 
 ## 6. Animation of 3D Creature
    * [Youtube Link](https://youtu.be/iVttcKXFOvs)
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/j_LEWNxZPeM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/iVttcKXFOvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
    
 ## 7. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
