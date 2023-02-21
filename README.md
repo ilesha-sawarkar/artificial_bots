@@ -66,12 +66,14 @@
    * We already have a count of the motor Neurons by simpling appending the name of the joint Link after creation to the motor Neuron list.
    * After which we send a sensor neuron to each joint created.
    * We can then iterate and adjust the weights which are used to Send the synapse(movement) to the joints
+   * Below is the flowchart depicting the generation of brains.
+
+   <img width="873" alt="Screenshot 2023-02-20 at 11 22 51 PM" src="https://user-images.githubusercontent.com/114837040/220254859-ca949f50-d940-45d5-b417-80a99e521fd5.png">
+
 
 
 ## 6. Animation of 3D Creature
    * [Youtube Link](https://youtu.be/iVttcKXFOvs)
-   
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/iVttcKXFOvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
    
    
    * Example of the 3D Creature generated
