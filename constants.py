@@ -22,7 +22,10 @@ maxLinks=15
 
 color_No_Sensor_Link= 'Blue'
 rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'
+maxLinks=15
 
+number_of_links= random.randint(5,maxLinks)
+randSensorsList = [random.randint(0,1) for _ in range (number_of_links)]
 
 color_Sensor_Link='Green'
 
