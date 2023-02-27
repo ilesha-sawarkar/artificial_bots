@@ -24,8 +24,8 @@ color_No_Sensor_Link= 'Blue'
 rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'
 maxLinks=15
 
-number_of_links= random.randint(5,maxLinks)
-randSensorsList = [random.randint(0,1) for _ in range (number_of_links)]
+#number_of_links= random.randint(5,maxLinks)
+#randSensorsList = [random.randint(0,1) for _ in range (number_of_links)]
 
 color_Sensor_Link='Green'
 
@@ -33,6 +33,28 @@ color_Sensor_Link='Green'
 rgba_Sensor_Link='0.0 1.0 0.0 1.0'
 numSensorNeurons=10
 numMotorNeurons=9
+
+
+#maxLinks = 10
+maxLinkSize = 1
+
+childrenPerParent = 10
+
+directionDict = {
+	"up": [0,0,1],
+	"down": [0,0,-1],
+	"right": [0,1,0],
+	"left": [0,-1,0],
+	"backward": [1,0,0],
+	"forward": [-1,0,0]
+}
+directionInverseDict = {
+	"up": "down",
+	"down": "up",
+	"left": "right",
+	"right": "left",
+	"forward": "backward",
+	"backward": "forward"}
 
 
 
@@ -89,3 +111,4 @@ print('targetAngles: ', targetAngles_BackLeg)
 
 
 
+	

@@ -29,7 +29,7 @@ class SIMULATION :
 		
 		p.setGravity(0,0,-9.8)
 		self.world = WORLD()
-		self.robot = ROBOT(solutionID)
+		self.robot = ROBOT(solutionID,self.world.objects)
 		#p.loadSDF("world.sdf")		
 		
 		#Run()

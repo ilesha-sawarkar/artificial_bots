@@ -84,7 +84,7 @@ class PARALLEL_HILL_CLIMBER :
 		best=100
 		for i in self.parents:
 			if self.parents[i].fitness > self.children[i].fitness:
-				self.parents[i] = self.children[i]	
+				self.parents[i] =self.children[i]
 			best= min(self.parents[i].fitness, best)
 			self.best_fitness_runs.append(best)
 				
