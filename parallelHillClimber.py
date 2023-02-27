@@ -9,23 +9,24 @@ import os
 
 class PARALLEL_HILL_CLIMBER :
 	def __init__(self):
-		os.system("rm brain*.nndf")
-		os.system("rm data/fitness*.nndf")
+		
 		self.parents = {}
 		
 		#self.parent = SOLUTION()	
 		self.nextAvailableID = 0
+		self.best_fitness_runs=[]
 		for i in range(c.populationSize):
 				self.parents[i] = SOLUTION(self.nextAvailableID)
 				self.nextAvailableID += 1
 		print(self.parents)
+		os.system("rm brain*.nndf")
+		os.system("rm data/fitness*.nndf")
 		
 	def Evolve(self):
 		self.Evaluate(self.parents, "GUI")
 		
-#		for currentGeneration in range(c.numberOfGenerations):
-#			self.Evolve_For_One_Generation()
-#		self.Show_Best()
+		for currentGeneration in range(c.numberOfGenerations):
+			self.Evolve_For_One_Generation()
 
 			
 	def Print(self):
@@ -80,15 +81,18 @@ class PARALLEL_HILL_CLIMBER :
 		#exit()
 		
 	def Select(self):
+		best=100
 		for i in self.parents:
 			if self.parents[i].fitness > self.children[i].fitness:
 				self.parents[i] = self.children[i]	
+			best= min(self.parents[i].fitness, best)
+			self.best_fitness_runs.append(best)
 				
 	def Show_Best(self):
-		min_fitness = 0
+		#min_fitness = 0
 		best_parent = self.parents[0]
-		for key, parent in self.parents.items():
-			if parent.fitness < min_fitness:
-				min_fitness = parent.fitness
+		for key, parent in self.parents.values():
+			if best_parent.fitness > parent.fitness:
 				best_parent = parent
-		best_parent.Start_Simulation("GUI")
+		
+		best_parent.Start_Simulation('GUI')

@@ -29,31 +29,24 @@ class ROBOT :
 
 		
 	def Prepare_To_Sense(self):
-		#self.sensors=SENSOR()
-		
 		for linkName in pyrosim.linkNamesToIndices:
 			#print(self.sensors)
 			self.sensors[linkName] = SENSOR(linkName)
-			#print(linkName)
-			#print(self.sensors)
+
 		
 	def Sense(self, time):
 		for linkName in pyrosim.linkNamesToIndices:
-			#print(self.sensors)
 			self.sensors[linkName].Get_Value(time)
 			
 			#print(linkName)
 
 		
 	def Prepare_To_Act(self):
-		i=0
+		
 		for jointName in pyrosim.jointNamesToIndices:
 			self.motors[jointName] = MOTOR(jointName)
-			#self.motors[jointName].Prepare_To_Act()
-			#self.motors[jointName].Set_Value(self.robotId, i)
-			
-			#print(c.am[i])
-			i=i+1
+
+			#i=i+1
 		
 		
 	def Act(self,t):
@@ -63,9 +56,6 @@ class ROBOT :
 			if self.nn.Is_Motor_Neuron(neuronName):
 				jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)    
 				desiredAngle = self.nn.Get_Value_Of(neuronName)*c.motorJointRange   
-				#print(jointName, desiredAngle)
-				
-				#print('Here Motors:',self.motors)
 				self.motors[jointName].Set_Value(self.robotId, desiredAngle)
 				
 				
@@ -84,10 +74,12 @@ class ROBOT :
 			
 			#self.motors[jointName] = sensor.MOTOR(jointName)
 	
-	def Get_Fitness(self):
-		basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
+	def Get_Fitness(self, objects):
+		basePositionAndOrientation = p.getBasePositionAndOrientation(objects[0])
 		basePosition = basePositionAndOrientation[0]
 		xPosition = basePosition[0]
+		#yPosition = basePosition[1]
+		height = basePosition[2]
 		fitness_file = open(f"data/tmp{self.solutionID}.txt", "w")
 		fitness_file.write(str(xPosition))
 		

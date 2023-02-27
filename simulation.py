@@ -49,5 +49,6 @@ class SIMULATION :
 			self.robot.Save_Values()#	
 	
 	def Get_Fitness(self):
-		self.robot.Get_Fitness()
+		print(self.world.objects)
+		self.robot.Get_Fitness(self.world.objects)
 		

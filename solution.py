@@ -18,6 +18,7 @@ class SOLUTION:
             self.motorNeurons=[]
             self.numSensorNeurons=0
             self.numMotorNeurons=0
+            self.sensorNeuronsLinkNames=[]
             self.sensorNeurons=[]
             self.LinkJointLink = []
             self.locationMatrix = np.zeros((80,80,80,3))
@@ -82,8 +83,8 @@ class SOLUTION:
         length = 1
         width = 1
         height = 1
-        x = -30
-        y = 10
+        x = -10
+        y = 5
         z = 0.5
         pyrosim.Send_Cube(name="Box", pos=[x,y,z] , size=[length,width,height])
         pyrosim.End()
