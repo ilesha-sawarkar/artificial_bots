@@ -13,7 +13,7 @@ import os
 
 class ROBOT :
 	def __init__(self,solutionID):
-		self.robotId = p.loadURDF(f"body/body{solutionID}.urdf")
+		self.robotId = p.loadURDF(f"body/body{solutionID}.urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
 		self.motors={}
 		self.sensors={}
 		
