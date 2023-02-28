@@ -81,7 +81,7 @@
 
 
 ## 7. Animation of 3D Creature
-   * [Youtube Link](https://youtu.be/iVttcKXFOvs)
+   * [Youtube Link](https://www.youtube.com/watch?v=DhgFk6nunDM)
    
    
    * Example of the 3D Creature generated
