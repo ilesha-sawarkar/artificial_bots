@@ -96,9 +96,14 @@
 ![Figure_1_npseed 40 rs 5](https://user-images.githubusercontent.com/114837040/221771610-893396ba-4d31-46f2-91b5-5216df8f3b93.png)
 
    * Fitness Graph=3, numpyseed=40, randomseed= 20
-![Figure_1npseed 40 rd 20](https://user-images.githubusercontent.com/114837040/221771715-fb328e18-c767-459b-ae9b-657fec6d563f.png)
+ ![Figure_20000sims](https://user-images.githubusercontent.com/114837040/221771911-567995ff-688b-4c39-8de6-d7b1b13581a0.png)
 
-   
+   * Fitness Graph=4, numpyseed 30, randomseed=100
+  ![Figure_1_latest](https://user-images.githubusercontent.com/114837040/221774593-bca1a4c5-ba73-46ae-b74d-7370a6f388d3.png)
+ 
+   * Fitness Graph=5, numpyseed = 50, randomseed=150
+ ![Figure_20000sims_v2](https://user-images.githubusercontent.com/114837040/221774795-47fdaf8f-19af-4d29-991a-58dd7248d697.png)
+
 
 ## 8. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
