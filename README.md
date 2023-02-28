@@ -9,10 +9,12 @@
 3. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#3-random-shapes-generated)
 4. [Generation of Body](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-generation-of-body)
 5. [Generation of Brain](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-generation-of-body)
-6. [Animation of 3D Evolving Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#6-animation-of-3d-creature)
-7. [Fitness Function](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-fitness-function)
-8. [Generation of children] ()
-9. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#5-citations-for-references-used-to-buil-this-project)
+6. Generation of Child
+7. [Animation of 3D Evolving Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#6-animation-of-3d-creature)
+8.  Fitness Graphs
+[Fitness Function](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-fitness-function)
+9. [Generation of children] 
+10. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#5-citations-for-references-used-to-buil-this-project)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -105,11 +107,11 @@
  ![Figure_20000sims_v2](https://user-images.githubusercontent.com/114837040/221774795-47fdaf8f-19af-4d29-991a-58dd7248d697.png)
 
 
-## 8. Fitness Function
+## 9. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
    * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
    * Additionally the fitness function also takes in the coordinates of the world object and finds the associate difference in distance at each evolution to ensure the creature moves closer to the objects in the world.
 
-## 8. References used to build this project
+## 10. References used to build this project
    *  [LudoBots](https://www.reddit.com/r/ludobots/wiki/installation/)
    *  [Pyrosim](https://github.com/jbongard/pyrosim)
