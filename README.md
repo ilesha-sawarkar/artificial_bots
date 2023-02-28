@@ -9,9 +9,10 @@
 3. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#3-random-shapes-generated)
 4. [Generation of Body](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-generation-of-body)
 5. [Generation of Brain](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-generation-of-body)
-6. [Animation of 3D Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#6-animation-of-3d-creature)
+6. [Animation of 3D Evolving Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#6-animation-of-3d-creature)
 7. [Fitness Function](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#4-fitness-function)
-8. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#5-citations-for-references-used-to-buil-this-project)
+8. [Generation of children] ()
+9. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D_generated_child_generations/README.md#5-citations-for-references-used-to-buil-this-project)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -69,10 +70,15 @@
    * Below is the flowchart depicting the generation of brains.
 
    <img width="873" alt="Screenshot 2023-02-20 at 11 22 51 PM" src="https://user-images.githubusercontent.com/114837040/220254859-ca949f50-d940-45d5-b417-80a99e521fd5.png">
+   
+## 6. Generation of Children
+   * For the Generation of children we check whether the child can be created or not first
+   * We generate the body and brain of the child based on the parent.
+   * Links are added and deleted based on how fast or slow the robot is evolving
 
 
 
-## 6. Animation of 3D Creature
+## 7. Animation of 3D Creature
    * [Youtube Link](https://youtu.be/iVttcKXFOvs)
    
    
@@ -81,7 +87,7 @@
    <img width="814" alt="Screenshot 2023-02-20 at 10 16 27 PM" src="https://user-images.githubusercontent.com/114837040/220246470-70a84778-34e6-45b4-a17b-44154798a56f.png">
    
 
-## 7. Fitness Function
+## 8. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
    * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
 
