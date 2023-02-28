@@ -3,6 +3,7 @@ import random
 
 gravity = -9.8
 
+#ns =80, randomseed=30, simlength 20000, gen=50 , pop=11
 numpyseed = 54
 randomseed = 59876
 numpy.random.seed(numpyseed)
