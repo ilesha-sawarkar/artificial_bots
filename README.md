@@ -86,10 +86,24 @@
    
    <img width="814" alt="Screenshot 2023-02-20 at 10 16 27 PM" src="https://user-images.githubusercontent.com/114837040/220246470-70a84778-34e6-45b4-a17b-44154798a56f.png">
    
+## 8.Fitness Graphs
+   * At each instance the fitness graphs can be generated with numpyseed and randomseed
+   * Fitness Graph=1, numpyseed=96, randomseed= 15
+   
+   ![Figure_1_npseed 96 rs 15](https://user-images.githubusercontent.com/114837040/221771531-4b2e5725-6d5f-4166-98f6-08020904b786.png)
+   
+   * Fitness Graph=2, numpyseed=40, randomseed= 5
+![Figure_1_npseed 40 rs 5](https://user-images.githubusercontent.com/114837040/221771610-893396ba-4d31-46f2-91b5-5216df8f3b93.png)
+
+   * Fitness Graph=3, numpyseed=40, randomseed= 20
+![Figure_1npseed 40 rd 20](https://user-images.githubusercontent.com/114837040/221771715-fb328e18-c767-459b-ae9b-657fec6d563f.png)
+
+   
 
 ## 8. Fitness Function
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
    * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
+   * Additionally the fitness function also takes in the coordinates of the world object and finds the associate difference in distance at each evolution to ensure the creature moves closer to the objects in the world.
 
 ## 8. References used to build this project
    *  [LudoBots](https://www.reddit.com/r/ludobots/wiki/installation/)
