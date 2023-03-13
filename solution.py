@@ -26,7 +26,7 @@ class SOLUTION:
 		self.linksAdded = []
 		self.locationMatrix = np.zeros((40,40,40,3))
 		self.connections = []
-		self.Joints=[]
+		self.LinkJoints=[]
 		
 #	def Evaluate(self,directOrGui ):
 #		self.Create_World()
@@ -49,6 +49,7 @@ class SOLUTION:
 		self.myID += 1
 	
 	def Start_Simulation(self, directOrGui, child_true=0):
+		self.Create_World()
 		if (child_true == 1):
 			self.Create_Child_Body()
 			self.Create_Child_Brain()
@@ -240,9 +241,9 @@ class SOLUTION:
 		self.connections= connections
 		
 		
-		for link in reversed(range(len(self.Joints))):
-			if ("_"+JoiningLink) in self.Joints[link]:
-				grandparentLink = self.Joints[li]
+		for link in reversed(range(len(self.LinkJoints))):
+			if ("_"+JoiningLink) in self.LinkJoints[link]:
+				grandparentLink = self.LinkJoints[link]
 				grandParAxis = total_creature_connections[grandparentLink]
 				break
 			
@@ -385,7 +386,7 @@ class SOLUTION:
 		total_creature_connections = {}
 		connections = []
 		self.sensorNeuronList=[]
-		self.Joints=[]
+		self.LinkJoints=[]
 		location_Matrix=self.locationMatrix
 		shapes=['sphere', 'cube']
 		
@@ -534,12 +535,12 @@ class SOLUTION:
 				
 				total_creature_connections[JoiningLink+"_"+"Link" + str(i)]=jointPosition_Direction
 				self.connections= connections
-				Joints=self.Joints
-				no_joints= len(self.Joints)
+				#Joints=self.Joints
+				no_joints= len(self.LinkJoints)
 				
 				for link in reversed(range(no_joints)):
-					if ("_"+JoiningLink) in self.Joints[link]:
-						grandparentLink = self.Joints[link]
+					if ("_"+JoiningLink) in self.LinkJoints[link]:
+						grandparentLink = self.LinkJoints[link]
 						grandParAxis = total_creature_connections[grandparentLink]
 						break
 					
@@ -643,7 +644,7 @@ class SOLUTION:
 				else:
 					self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[0,0,height/2], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
 					
-				self.Joints.append(JoiningLink + "_" + "Link" + str(i))
+				self.LinkJoints.append(JoiningLink + "_" + "Link" + str(i))
 		self.shapeInfo = shapeInfo
 		self.total_creature_connections = total_creature_connections
 		self.shapesAdded = shapesAdded
