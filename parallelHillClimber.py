@@ -14,16 +14,19 @@ class PARALLEL_HILL_CLIMBER :
 		
 		#self.parent = SOLUTION()	
 		self.nextAvailableID = 0
+		self.fitness=[]
 		self.best_fitness_runs=[]
 		for i in range(c.populationSize):
 				self.parents[i] = SOLUTION(self.nextAvailableID)
 				self.nextAvailableID += 1
 		print('Parents:\n',self.parents)
 		os.system("rm brain/brain*.nndf")
-		os.system("rm data/fitness*.nndf")
+		#os.system("rm data/fitness*.nndf")
+		os.system("rm data/fitness*.txt")
+		os.system("rm body/body*.urdf")
 		
 	def Evolve(self):
-		self.Evaluate(self.parents, "GUI", 0)
+		self.Evaluate(solutions=self.parents, child_true=0)
 		
 		for currentGeneration in range(c.numberOfGenerations):
 			self.Evolve_For_One_Generation()
@@ -35,17 +38,17 @@ class PARALLEL_HILL_CLIMBER :
 			print(f'parent fitness {self.parents[i].fitness} child fitness {self.children[i].fitness}')
 		print("\n")
 		
-	def Evaluate(self,solutions, mode, child_true):
+	def Evaluate(self,solutions, child_true):
 		for i in range(c.populationSize):
-			solutions[i].Start_Simulation(mode, child_true)
+			solutions[i].Start_Simulation("DIRECT", child_true)
 			
 		for i in range(c.populationSize):
-			c.fitness_Values.append(solutions[i].Wait_For_Simulation_To_End())
+			fitness.append(solutions[i].Wait_For_Simulation_To_End())
 			
 	def Evolve_For_One_Generation(self):
 		self.Spawn()
 		self.Mutate()
-		self.Evaluate(self.children, "DIRECT", 1)
+		self.Evaluate(self.children, 1)
 		self.Print()
 		self.Select()
 		
@@ -55,8 +58,8 @@ class PARALLEL_HILL_CLIMBER :
 		
 	def Spawn(self):
 		self.children = {}
-		for key, parent in self.parents.items():
-			self.children[key] = copy.deepcopy(parent)
+		for key in self.parents:
+			self.children[key] = copy.deepcopy(parent[key])
 			self.children[key].myID = self.nextAvailableID
 			self.nextAvailableID += 1
 			#	self.children[key] = copy.deepcopy(self.parents[parent])
@@ -91,16 +94,16 @@ class PARALLEL_HILL_CLIMBER :
 	def Show_Best(self):
 		#best=float('inf')
 		#min_fitness = 0
-		bestParent_Key=-100
+		bestParent_Key=0
 		best_parent = float('inf') #self.parents[0]
-		for key in self.parents.values:
-			if best_parent.fitness > self.parents[key].fitness:
+		for key in self.parents:
+			if best_parent > self.parents[key].fitness:
 				best_parent = self.parents[key].fitness
 				bestParent_Key=key
 				
 		print("Best Parent:",self.parents[bestParent_Key].fitness)
 		
-		self.parents[key].Start_Simulation('GUI',1)
+		self.parents[bestParent_Key].Start_Simulation('GUI',1)
 		
 	
 	def store_best_fitness(self):
@@ -132,3 +135,4 @@ class PARALLEL_HILL_CLIMBER :
 #		plt.ylabel("Fitness", fontdict = font2)
 #		plt.plot(xpoints, ypoints, marker = 'o')
 #		plt.show()
+		
