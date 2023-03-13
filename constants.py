@@ -9,9 +9,24 @@ import pyrosim.pyrosim as pyrosim
 import numpy as np
 import math
 import random
+import pandas as pd
+
 
 
 iter=100000 #iteration times
+
+numpyseed=590
+randomseed=59888
+np.random.seed(numpyseed)
+random.seed(randomseed)
+
+col=1
+
+fitness_Values=[]
+df=pd.DataFrame()
+
+
+
 
 populationSize= 1
 numberOfGenerations= 20
@@ -19,6 +34,7 @@ numberOfGenerations= 20
 motorJointRange=0.7
 
 maxLinks=15
+#maxLinkSize = 1
 
 color_No_Sensor_Link= 'Blue'
 rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'
@@ -36,29 +52,29 @@ numMotorNeurons=9
 
 
 #maxLinks = 10
-maxLinkSize = 1
-
-childrenPerParent = 10
-
-directionDict = {
-	"up": [0,0,1],
-	"down": [0,0,-1],
-	"right": [0,1,0],
-	"left": [0,-1,0],
-	"backward": [1,0,0],
-	"forward": [-1,0,0]
-}
-directionInverseDict = {
-	"up": "down",
-	"down": "up",
-	"left": "right",
-	"right": "left",
-	"forward": "backward",
-	"backward": "forward"}
 
 
-
-
+#childrenPerParent = 10
+#
+#directionDict = {
+#	"up": [0,0,1],
+#	"down": [0,0,-1],
+#	"right": [0,1,0],
+#	"left": [0,-1,0],
+#	"backward": [1,0,0],
+#	"forward": [-1,0,0]
+#}
+#directionInverseDict = {
+#	"up": "down",
+#	"down": "up",
+#	"left": "right",
+#	"right": "left",
+#	"forward": "backward",
+#	"backward": "forward"}
+#
+#
+#
+#
 
 #------------------------
 #FrontLeg 

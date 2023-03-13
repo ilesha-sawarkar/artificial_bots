@@ -18,12 +18,12 @@ class PARALLEL_HILL_CLIMBER :
 		for i in range(c.populationSize):
 				self.parents[i] = SOLUTION(self.nextAvailableID)
 				self.nextAvailableID += 1
-		print(self.parents)
-		os.system("rm brain*.nndf")
+		print('Parents:\n',self.parents)
+		os.system("rm brain/brain*.nndf")
 		os.system("rm data/fitness*.nndf")
 		
 	def Evolve(self):
-		self.Evaluate(self.parents, "GUI")
+		self.Evaluate(self.parents, "GUI", 0)
 		
 		for currentGeneration in range(c.numberOfGenerations):
 			self.Evolve_For_One_Generation()
@@ -35,17 +35,17 @@ class PARALLEL_HILL_CLIMBER :
 			print(f'parent fitness {self.parents[i].fitness} child fitness {self.children[i].fitness}')
 		print("\n")
 		
-	def Evaluate(self,solutions, mode):
+	def Evaluate(self,solutions, mode, child_true):
 		for i in range(c.populationSize):
-			solutions[i].Start_Simulation(mode)
+			solutions[i].Start_Simulation(mode, child_true)
 			
 		for i in range(c.populationSize):
-			solutions[i].Wait_For_Simulation_To_End()
+			c.fitness_Values.append(solutions[i].Wait_For_Simulation_To_End())
 			
 	def Evolve_For_One_Generation(self):
 		self.Spawn()
 		self.Mutate()
-		self.Evaluate(self.children, "DIRECT")
+		self.Evaluate(self.children, "DIRECT", 1)
 		self.Print()
 		self.Select()
 		
@@ -81,18 +81,54 @@ class PARALLEL_HILL_CLIMBER :
 		#exit()
 		
 	def Select(self):
-		best=100
+		#best=100
 		for i in self.parents:
 			if self.parents[i].fitness > self.children[i].fitness:
 				self.parents[i] =self.children[i]
-			best= min(self.parents[i].fitness, best)
-			self.best_fitness_runs.append(best)
+				#best= min(self.parents[i].fitness, best)
+				#self.best_fitness_runs.append(best)
 				
 	def Show_Best(self):
+		#best=float('inf')
 		#min_fitness = 0
-		best_parent = self.parents[0]
-		for key, parent in self.parents.values():
-			if best_parent.fitness > parent.fitness:
-				best_parent = parent
+		bestParent_Key=-100
+		best_parent = float('inf') #self.parents[0]
+		for key in self.parents.values:
+			if best_parent.fitness > self.parents[key].fitness:
+				best_parent = self.parents[key].fitness
+				bestParent_Key=key
+				
+		print("Best Parent:",self.parents[bestParent_Key].fitness)
 		
-		best_parent.Start_Simulation('GUI')
+		self.parents[key].Start_Simulation('GUI',1)
+		
+	
+	def store_best_fitness(self):
+		x_cordinates= [i for i in range(c.numberOfGenerations+1)]
+		
+		fitness_population = []
+		counter = 0
+		best_fitness = []
+		
+		
+		for i in range(len(self.fitness)):
+			fitness_population.append(self.fitness[i])
+			counter +=1
+			if counter == c.populationSize:
+				best_fitness.append(min(fitness_population))
+				counter = 0
+				
+		for i in range(len(best_fitness)):
+			best_fitness[i] = int(best_fitness[i] * 1) #-1
+		col_name=str(c.col)
+		c.df[col_name] = best_fitness
+		c.col=c.col+1
+#			
+#		ypoints = best_fitness
+#		font1 = {'family':'serif','color':'blue','size':20}
+#		font2 = {'family':'serif','color':'darkred','size':15}
+#		plt.title("Fitness =  Negative Euclidean distance to the box/numpyseed = "+str(c.numpyseed)+"/randomseed = "+str(c.randomseed), fontdict = font1)
+#		plt.xlabel("Generations", fontdict = font2)
+#		plt.ylabel("Fitness", fontdict = font2)
+#		plt.plot(xpoints, ypoints, marker = 'o')
+#		plt.show()
