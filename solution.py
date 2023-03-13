@@ -169,9 +169,9 @@ class SOLUTION:
 					
 					if jointPosition_Direction ==0:
 						for x in range(length):
-							for wid in range(width):
-								for hght in range(height):
-									if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - wid/2), math.ceil(MidPointZ - height/2 + hght)] == positionTaken).all():
+							for y in range(width):
+								for z in range(height):
+									if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - y /2), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
 										flag2=1
 										tempLocationMatrix=location_Matrix.copy()
 										break
@@ -186,13 +186,13 @@ class SOLUTION:
 										
 										minimumZ=MidPointZ - height/2
 										maximumZ=MidPointZ - height/2
-										tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+										tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 										
 					elif jointPosition_Direction ==1:
 						for x in range(length):
-							for wid in range(width):
-								for hght in range(height):
-									if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(wid  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + hght)] == positionTaken).all():
+							for y in range(width):
+								for z in range(height):
+									if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(y  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
 										flag2=1
 										tempLocationMatrix=location_Matrix.copy()
 										break
@@ -207,13 +207,13 @@ class SOLUTION:
 										
 										minimumZ=MidPointZ - height/2
 										maximumZ=MidPointZ - height/2
-										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 										
 					elif jointPosition_Direction ==2:
 						for x in range(length):
-							for wid in range(width):
-								for hght in range(height):
-									if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(wid  + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
+							for y in range(width):
+								for z in range(height):
+									if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(y + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
 										flag2=1
 										tempLocationMatrix=location_Matrix.copy()
 										break
@@ -228,7 +228,7 @@ class SOLUTION:
 										
 										minimumZ=JoiningLink_Z_MaxMin[1]
 										maximumZ=minimumZ + height
-										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 										
 		location_Matrix= tempLocationMatrix.copy()
 		
@@ -388,7 +388,7 @@ class SOLUTION:
 		self.sensorNeuronList=[]
 		self.LinkJoints=[]
 		location_Matrix=self.locationMatrix
-		shape_List=['sphere', 'cube']
+		shape_List=['sphere'] #, 'cube'
 		
 		
 		number_of_links= random.randint(3,c.maxLinks)
@@ -410,6 +410,7 @@ class SOLUTION:
 			
 			shape_choice=random.choice(shape_List) #shape chosen for each link
 			
+			
 			if self.sensorNeurons[i]==0: #No Sensor
 				color_name=c.color_No_Sensor_Link
 				rgba_string=c.rgba_No_Sensor_Link 
@@ -429,13 +430,15 @@ class SOLUTION:
 				minimumY=0
 				minimumZ=0
 				for x in range(length):
-					for wid in range(width):
-						for hght in range(height):
-							location_Matrix[10+x, 20+wid, 0+height]=1
+					for y in range(width):
+						for z in range(height):
+							location_Matrix[10+x, 20+y , 0+height]=1
 							
 							maximumX=20+length
 							maximumY=20+width
-							maximumZ=0 +hght
+							maximumZ=0 +z 
+							
+			if(i == 0):
 				
 				shapeInfo["Link" + str(i)]=[[length,width,height], [minimumX, maximumX], [minimumY, maximumY], [minimumZ, maximumZ], shape_choice]
 				
@@ -465,9 +468,9 @@ class SOLUTION:
 						
 						if jointPosition_Direction ==0:
 							for x in range(length):
-								for wid in range(width):
-									for hght in range(height):
-										if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - wid/2), math.ceil(MidPointZ - height/2 + hght)] == positionTaken).all():
+								for y in range(width):
+									for z in range(height):
+										if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - y /2), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
 											flag2=1
 											tempLocationMatrix=location_Matrix.copy()
 											break
@@ -482,13 +485,13 @@ class SOLUTION:
 											
 											minimumZ=MidPointZ - height/2
 											maximumZ=MidPointZ - height/2
-											tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+											tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 											
 						elif jointPosition_Direction ==1:
 							for x in range(length):
-								for wid in range(width):
-									for hght in range(height):
-										if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(wid  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + hght)] == positionTaken).all():
+								for y in range(width):
+									for z in range(height):
+										if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(y  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
 											flag2=1
 											tempLocationMatrix=location_Matrix.copy()
 											break
@@ -503,13 +506,13 @@ class SOLUTION:
 											
 											minimumZ=MidPointZ - height/2
 											maximumZ=MidPointZ - height/2
-											tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+											tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 											
 						elif jointPosition_Direction ==2:
 							for x in range(length):
-								for wid in range(width):
-									for hght in range(height):
-										if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(wid  + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
+								for y in range(width):
+									for z in range(height):
+										if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(y  + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
 											flag2=1
 											tempLocationMatrix=location_Matrix.copy()
 											break
@@ -524,7 +527,7 @@ class SOLUTION:
 											
 											minimumZ=JoiningLink_Z_MaxMin[1]
 											maximumZ=minimumZ + height
-											tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +wid), math.ceil(MidPointZ - height/2 +hght)]=1
+											tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
 											
 				location_Matrix= tempLocationMatrix.copy()
 				
