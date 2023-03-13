@@ -17,8 +17,8 @@ class PARALLEL_HILL_CLIMBER :
 		self.fitness=[]
 		self.best_fitness_runs=[]
 		for i in range(c.populationSize):
-				self.parents[i] = SOLUTION(self.nextAvailableID)
-				self.nextAvailableID += 1
+			self.parents[i] = SOLUTION(self.nextAvailableID)
+			self.nextAvailableID += 1
 		print('Parents:\n',self.parents)
 		os.system("rm brain/brain*.nndf")
 		#os.system("rm data/fitness*.nndf")
@@ -75,8 +75,8 @@ class PARALLEL_HILL_CLIMBER :
 		#	self.nextAvailableID += 1
 			
 	def Mutate(self):
-		for key, child in self.children.items():
-			child.Mutate()
+		for key in self.children:
+			self.children[key].Mutate()
 			#self.child.Mutate()
 		#print('\n Mutate')
 		#print(self.parent.weights)
