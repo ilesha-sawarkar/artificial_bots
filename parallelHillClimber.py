@@ -43,7 +43,7 @@ class PARALLEL_HILL_CLIMBER :
 			solutions[i].Start_Simulation("DIRECT", child_true)
 			
 		for i in range(c.populationSize):
-			fitness.append(solutions[i].Wait_For_Simulation_To_End())
+			self.fitness.append(solutions[i].Wait_For_Simulation_To_End())
 			
 	def Evolve_For_One_Generation(self):
 		self.Spawn()

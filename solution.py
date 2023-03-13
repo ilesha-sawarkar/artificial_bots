@@ -57,12 +57,12 @@ class SOLUTION:
 			self.Create_Body()
 			self.Create_Brain()
 			
-		os.system(f"python3 simulate.py {directOrGui} {self.myID}   &")  #2>1
+		os.system("python3 simulate.py " + str(directOrGui) + " " + str(self.myID) + " &")  #2>1
 		
 	def Wait_For_Simulation_To_End(self):
-		while not os.path.exists(f"data/fitness{self.myID}.txt"):
+		while not os.path.exists("data/fitness"+str(self.myID)+".txt"):
 			time.sleep(0.01)
-		fit_file = open(f"data/fitness{self.myID}.txt", "r")
+		fit_file = open("fitness"+str(self.myID)+".txt", "r")
 		fitness = fit_file.read()
 		if fitness == '':
 			
@@ -71,7 +71,7 @@ class SOLUTION:
 		self.fitness = float(fitness)
 		print('Fitness: ', self.fitness)
 		fit_file.close()
-		os.system(f"rm data/fitness{self.myID}.txt")
+		os.system("fitness"+str(self.myID)+".txt")
 		return(self.fitness)
 		
 	def Create_World(self):
@@ -388,7 +388,7 @@ class SOLUTION:
 		self.sensorNeuronList=[]
 		self.LinkJoints=[]
 		location_Matrix=self.locationMatrix
-		shapes=['sphere', 'cube']
+		shape_List=['sphere', 'cube']
 		
 		
 		number_of_links= random.randint(3,c.maxLinks)
@@ -408,7 +408,7 @@ class SOLUTION:
 			width = random.randint(1,2) 
 			height = random.randint(1,2) 
 			
-			shape_choice=random.choice(shapes) #shape chosen for each link
+			shape_choice=random.choice(shape_List) #shape chosen for each link
 			
 			if self.sensorNeurons[i]==0: #No Sensor
 				color_name=c.color_No_Sensor_Link
@@ -719,59 +719,59 @@ class SOLUTION:
 				for j in child_joints:
 					if ("_" + link) in j:
 						jointPositionAxis = total_creature_connections[j]
-						linkToJoin = j[0:j.find("_")]
+						JoiningLink = j[0:j.find("_")]
 						break
 					
 				for k in child_joints:
-					if ("_" + linkToJoin) in k:
+					if ("_" + JoiningLink) in k:
 						grandParAxis = total_creature_connections[k]
 						
 				# Joints   
-				if (linkToJoin == "Link0"):
+				if (JoiningLink == "Link0"):
 					if (jointPositionAxis == 0):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , 
-							parent = linkToJoin , 
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link , 
+							parent = JoiningLink , 
 							child = link , 
 							type = "revolute", 
-							position = [shapeInfo[linkToJoin][0], shapeInfo[linkToJoin][1]/2, 
-								shapeInfo[linkToJoin][2]/2], 
+							position = [shapeInfo[JoiningLink][0], shapeInfo[JoiningLink][1]/2, 
+								shapeInfo[JoiningLink][2]/2], 
 							jointAxis = "1 0 0")
 						
 					elif (jointPositionAxis == 1):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link ,
-							parent = linkToJoin , 
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link ,
+							parent = JoiningLink , 
 							child = link ,
 							type = "revolute", 
-							position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1], 
-								shapeInfo[linkToJoin][2]/2], 
+							position = [shapeInfo[JoiningLink][0]/2, shapeInfo[JoiningLink][1], 
+								shapeInfo[JoiningLink][2]/2], 
 							jointAxis = "0 1 0")
 					else:
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0]/2, shapeInfo[JoiningLink][1]/2, shapeInfo[JoiningLink][2]], jointAxis = "0 0 1")
 						
 				elif(grandParAxis == jointPositionAxis):
 					if (jointPositionAxis == 0):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0],0,0], jointAxis = "1 0 0")
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0],0,0], jointAxis = "1 0 0")
 					elif (jointPositionAxis == 1):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [0,shapeInfo[linkToJoin][1],0], jointAxis = "0 1 0")
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [0,shapeInfo[JoiningLink][1],0], jointAxis = "0 1 0")
 					else:
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0,0,shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink  , child = link , type = "revolute", position = [0,0,shapeInfo[JoiningLink][2]], jointAxis = "0 0 1")
 						
 				else:
 					if (grandParAxis == 0):
 						if (jointPositionAxis == 1):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "0 1 0")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0]/2, shapeInfo[JoiningLink][1]/2, 0], jointAxis = "0 1 0")
 						else:
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink  , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0]/2, 0, shapeInfo[JoiningLink][2]/2], jointAxis = "0 0 1")
 					elif (grandParAxis == 1):
 						if (jointPositionAxis == 0):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "1 0 0")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0]/2, shapeInfo[JoiningLink][1]/2, 0], jointAxis = "1 0 0")
 						else:
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink  , child = link , type = "revolute", position = [0, shapeInfo[JoiningLink][1]/2, shapeInfo[JoiningLink][2]/2], jointAxis = "0 0 1")
 					else:
 						if (jointPositionAxis == 0):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0,  shapeInfo[linkToJoin][2]/2], jointAxis = "1 0 0")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link , parent = JoiningLink , child = link , type = "revolute", position = [shapeInfo[JoiningLink][0]/2, 0,  shapeInfo[JoiningLink][2]/2], jointAxis = "1 0 0")
 						else:
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link, parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
+							pyrosim.Send_Joint(name = JoiningLink + "_" + link, parent = JoiningLink  , child = link , type = "revolute", position = [0, shapeInfo[JoiningLink][1]/2, shapeInfo[JoiningLink][2]/2], jointAxis = "0 1 0")
 							
 				# Next link
 				if (jointPositionAxis == 0):

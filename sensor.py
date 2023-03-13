@@ -7,7 +7,7 @@ class SENSOR :
 	def __init__(self, linkName):
 		#sensor = SENSOR(linkName)	
 		self.linkName=linkName
-		self.values = np.zeros(1000)
+		self.values = np.zeros(c.iter)
 
 
 	def Get_Value(self, time):
