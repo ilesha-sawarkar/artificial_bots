@@ -15,7 +15,7 @@ random.seed(c.randomseed)
 
 class SOLUTION:
 	def __init__(self, ID):
-		self.weights=0
+		#self.weights=np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
 		self.myID= ID
 		self.motorNeurons=[]
 		self.numSensorNeurons=0
@@ -27,6 +27,7 @@ class SOLUTION:
 		self.locationMatrix = np.zeros((40,40,40,3))
 		self.connections = []
 		self.LinkJoints=[]
+		self.weights=np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
 		
 #	def Evaluate(self,directOrGui ):
 #		self.Create_World()
@@ -125,237 +126,238 @@ class SOLUTION:
 			# del LinkJoiNtLink[LinkJoitLinkToRemove]
 			del total_creature_connections[child_links]
 			
-		elif (add_remove_none==1):
-			sensor_val=random.randint(0,1)
-			sensorNeuronList.append(sensor_val)			
-			length = random.randint(1,2) 
-			width = random.randint(1,2) 
-			height = random.randint(1,2) 
-			shapes=['sphere', 'cube']
-			
-			shape_choice=random.choice(shapes) #shape chosen for each link
-			
-			if sensor_val==0: #No Sensor
-				color_name=c.color_No_Sensor_Link
-				rgba_string=c.rgba_No_Sensor_Link 
-			else:
-				color_name=c.color_Sensor_Link
-				rgba_string=c.rgba_Sensor_Link 
-				
-			if shape_choice=='sphere':
-				length=int((width/2))
-				height=int((width/2))
-				width=width
-			
-			while(flag2==1):
-				
-				
-				jointPosition_Direction = random.choice([0,1,2])
-				
-				JoiningLink= random.choice(shapesAdded)  #ranndomly choose a link to add a joint to
-				
-				if ([jointPosition_Direction, JoiningLink ] not in connections):
-					JoiningLink_X_MaxMin= shapeInfo[JoiningLink][1]
-					JoiningLink_Y_MaxMin= shapeInfo[JoiningLink][2]
-					JoiningLink_Z_MaxMin= shapeInfo[JoiningLink][3]
-					
-					MidPointX = (JoiningLink_X_MaxMin[0]+JoiningLink_X_MaxMin[1])/2
-					MidPointY = (JoiningLink_Y_MaxMin[0]+JoiningLink_Y_MaxMin[1])/2
-					MidPointZ = (JoiningLink_Z_MaxMin[0]+JoiningLink_Z_MaxMin[1])/2
-					
-					tempLocationMatrix = location_Matrix.copy()
-					
-					positionTaken = np.array([1,1,1])
-					
-					if jointPosition_Direction ==0:
-						for x in range(length):
-							for y in range(width):
-								for z in range(height):
-									if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - y /2), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
-										flag2=1
-										tempLocationMatrix=location_Matrix.copy()
-										break
-									else:
-										flag2=0
-										
-										minimumX=MidPointX -length/2
-										maximumX=minimumX+length
-										
-										minimumY=JoiningLink_Y_MaxMin[1]
-										maximumY=minimumY+width
-										
-										minimumZ=MidPointZ - height/2
-										maximumZ=MidPointZ - height/2
-										tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
-										
-					elif jointPosition_Direction ==1:
-						for x in range(length):
-							for y in range(width):
-								for z in range(height):
-									if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(y  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
-										flag2=1
-										tempLocationMatrix=location_Matrix.copy()
-										break
-									else:
-										flag2=0
-										
-										minimumX=MidPointX -length/2
-										maximumX=minimumX+length
-										
-										minimumY=JoiningLink_Y_MaxMin[1]
-										maximumY=minimumY+width
-										
-										minimumZ=MidPointZ - height/2
-										maximumZ=MidPointZ - height/2
-										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
-										
-					elif jointPosition_Direction ==2:
-						for x in range(length):
-							for y in range(width):
-								for z in range(height):
-									if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(y + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
-										flag2=1
-										tempLocationMatrix=location_Matrix.copy()
-										break
-									else:
-										flag2=0
-										
-										minimumX=MidPointX -length/2
-										maximumX=minimumX+length
-										
-										minimumY=MidPointY -width/2
-										maximumY=minimumY+width
-										
-										minimumZ=JoiningLink_Z_MaxMin[1]
-										maximumZ=minimumZ + height
-										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
-										
-		location_Matrix= tempLocationMatrix.copy()
-		
-		shapeInfo["Link" + str(i)] = [[length,width,height], [minimumX, maximumX], [minimumY, maximumY], [minimumZ, maximumZ], shape_choice]
-		
-		shapesAdded.append("Link" + str(i))
-		connections.append([jointPosition_Direction, JoiningLink])
-		
-		total_creature_connections[JoiningLink+"_"+"Link" + str(i)]=jointPosition_Direction
-		self.connections= connections
-		
-		
-		for link in reversed(range(len(self.LinkJoints))):
-			if ("_"+JoiningLink) in self.LinkJoints[link]:
-				grandparentLink = self.LinkJoints[link]
-				grandParAxis = total_creature_connections[grandparentLink]
-				break
-			
-		if(JoiningLink == "Link0"):
-			if(jointPosition_Direction==0):
-				pyrosim.Send_Joint(
-					name=JoiningLink+"_"+"Link" + str(i), 
-					parent=JoiningLink, 
-					child="Link" + str(i), type="revolute",
-					position=[shapeInfo[JoiningLink][0], 
-						shapeInfo[JoiningLink][0][1]/2,
-						shapeInfo[JoiningLink][0][2]/2],
-					jointAxis="1 0 0")
-			elif(jointPosition_Direction==1):
-				pyrosim.Send_Joint(
-					name=JoiningLink+"_"+"Link" + str(i), 
-					parent=JoiningLink, 
-					child="Link" + str(i), type="revolute",
-					position=[shapeInfo[JoiningLink][0][0]/2 , 
-						shapeInfo[JoiningLink][0][1],
-						shapeInfo[JoiningLink][0][2]/2],
-					jointAxis="0 1 0")
-			elif(jointPosition_Direction==2):
-				pyrosim.Send_Joint(
-					name=JoiningLink+"_"+"Link" + str(i), 
-					parent=JoiningLink, 
-					child="Link" + str(i), type="revolute",
-					position=[shapeInfo[JoiningLink][0][0]/2 , 
-						shapeInfo[JoiningLink][0][1]/2,
-						shapeInfo[JoiningLink][0][2]],
-					jointAxis="0 0 1")
-				
-		elif(grandParAxis == jointPosition_Direction):
-			if (jointPosition_Direction == 0):
-				pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[JoiningLink][0][0],0,0], jointAxis = "1 0 0")
-			elif (jointPosition_Direction == 1):
-				pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [0,shapeInfo[JoiningLink][0][1],0], jointAxis = "0 1 0")
-			elif (jointPosition_Direction == 2):
-				pyrosim.Send_Joint(name = shapeInfo + "_" + "Link" + str(i) , parent = JoiningLink  , child = "Link" + str(i) , type = "revolute", position = [0,0, shapeInfo[JoiningLink][0][2]], jointAxis = "0 0 1")
-				
-		else:
-			if (grandParAxis == 0):
-				if (jointPosition_Direction == 1):
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [
-						shapeInfo[JoiningLink][0][0]/2,
-						shapeInfo[JoiningLink][0][1]/2,
-						0], jointAxis = "0 1 0")
-				else:
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , 
-						child = "Link" + str(i) ,
-						type = "revolute", 
-						position = [shapeInfo[JoiningLink][0][0]/2,
-							0,
-							shapeInfo[JoiningLink][0][2]/2], 
-						jointAxis = "0 0 1")
-					
-			elif (grandParAxis == 1):
-				if (jointPosition_Direction == 0):
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
-						parent = JoiningLink , 
-						child = "Link" + str(i) , 
-						type = "revolute",
-						position = [shapeInfo[JoiningLink][0][0]/2,
-						shapeInfo[JoiningLink][0][1]/2,
-						0], jointAxis = "0 1 0")
-				else:
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
-						parent = JoiningLink , 
-						child = "Link" + str(i) , 
-						type = "revolute",
-						position = [0, 
-							shapeInfo[JoiningLink][0][1]/2,
-							shapeInfo[JoiningLink][0][2]/2], 
-						jointAxis = "0 0 1")
-			else:
-				if (jointPosition_Direction == 0):
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
-						parent = JoiningLink , 
-						child = "Link" + str(i) , 
-						type = "revolute",
-						position = [
-							shapeInfo[JoiningLink][0][0]/2,
-							0, 
-							shapeInfo[JoiningLink][0][2]/2], 
-						jointAxis = "1 0 0")
-				else:
-					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
-						parent = JoiningLink , 
-						child = "Link" + str(i) , 
-						type = "revolute",
-						position = [0, 
-							shapeInfo[JoiningLink][0][1]/2,
-							shapeInfo[JoiningLink][0][2]/2], 
-						jointAxis = "0 0 1")
-					
-		if (jointPosition_Direction == 0):
-			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[length/2,0,0], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
-		elif (jointPosition_Direction == 1):
-			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[0,width/2,0], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
-			
-		else:
-			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[0,0,height/2], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
-#		self.shapeInfo = shapeInfo
-#		self.total_creature_connections = total_creature_connections
-#		self.shapesAdded = shapesAdded
-			
+#		elif (add_remove_none==1):
+#			sensor_val=random.randint(0,1)
+#			sensorNeuronList.append(sensor_val)			
+#			length = random.randint(1,2) 
+#			width = random.randint(1,2) 
+#			height = random.randint(1,2) 
+#			shapes=['sphere', 'cube']
+#			
+#			shape_choice=random.choice(shapes) #shape chosen for each link
+#			
+#			if sensor_val==0: #No Sensor
+#				color_name=c.color_No_Sensor_Link
+#				rgba_string=c.rgba_No_Sensor_Link 
+#			else:
+#				color_name=c.color_Sensor_Link
+#				rgba_string=c.rgba_Sensor_Link 
+#				
+#			if shape_choice=='sphere':
+#				length=int((width/2))
+#				height=int((width/2))
+#				width=width
+#			
+#			while(flag2==1):
+#				
+#				
+#				jointPosition_Direction = random.choice([0,1,2])
+#				
+#				JoiningLink= random.choice(shapesAdded)  #ranndomly choose a link to add a joint to
+#				
+#				if ([jointPosition_Direction, JoiningLink ] not in connections):
+#					JoiningLink_X_MaxMin= shapeInfo[JoiningLink][1]
+#					JoiningLink_Y_MaxMin= shapeInfo[JoiningLink][2]
+#					JoiningLink_Z_MaxMin= shapeInfo[JoiningLink][3]
+#					
+#					MidPointX = (JoiningLink_X_MaxMin[0]+JoiningLink_X_MaxMin[1])/2
+#					MidPointY = (JoiningLink_Y_MaxMin[0]+JoiningLink_Y_MaxMin[1])/2
+#					MidPointZ = (JoiningLink_Z_MaxMin[0]+JoiningLink_Z_MaxMin[1])/2
+#					
+#					tempLocationMatrix = location_Matrix.copy()
+#					
+#					positionTaken = np.array([1,1,1])
+#					
+#					if jointPosition_Direction ==0:
+#						for x in range(length):
+#							for y in range(width):
+#								for z in range(height):
+#									if (location_Matrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - y /2), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
+#										flag2=1
+#										tempLocationMatrix=location_Matrix.copy()
+#										break
+#									else:
+#										flag2=0
+#										
+#										minimumX=MidPointX -length/2
+#										maximumX=minimumX+length
+#										
+#										minimumY=JoiningLink_Y_MaxMin[1]
+#										maximumY=minimumY+width
+#										
+#										minimumZ=MidPointZ - height/2
+#										maximumZ=MidPointZ - height/2
+#										tempLocationMatrix[math.ceil(x+ JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
+#										
+#					elif jointPosition_Direction ==1:
+#						for x in range(length):
+#							for y in range(width):
+#								for z in range(height):
+#									if (location_Matrix[math.ceil(MidPointX - length/2 + x), math.ceil(y  + JoiningLink_Y_MaxMin[1]), math.ceil(MidPointZ - height/2 + z )] == positionTaken).all():
+#										flag2=1
+#										tempLocationMatrix=location_Matrix.copy()
+#										break
+#									else:
+#										flag2=0
+#										
+#										minimumX=MidPointX -length/2
+#										maximumX=minimumX+length
+#										
+#										minimumY=JoiningLink_Y_MaxMin[1]
+#										maximumY=minimumY+width
+#										
+#										minimumZ=MidPointZ - height/2
+#										maximumZ=MidPointZ - height/2
+#										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
+#										
+#					elif jointPosition_Direction ==2:
+#						for x in range(length):
+#							for y in range(width):
+#								for z in range(height):
+#									if (location_Matrix[ math.ceil(MidPointX - length/2 + x), math.ceil(y + JoiningLink_Y_MaxMin[1]), math.ceil(JoiningLink_Z_MaxMin[1])] == positionTaken).all():
+#										flag2=1
+#										tempLocationMatrix=location_Matrix.copy()
+#										break
+#									else:
+#										flag2=0
+#										
+#										minimumX=MidPointX -length/2
+#										maximumX=minimumX+length
+#										
+#										minimumY=MidPointY -width/2
+#										maximumY=minimumY+width
+#										
+#										minimumZ=JoiningLink_Z_MaxMin[1]
+#										maximumZ=minimumZ + height
+#										tempLocationMatrix[math.ceil(x + JoiningLink_X_MaxMin[1]), math.ceil(MidPointY - width/2 +y ), math.ceil(MidPointZ - height/2 +z )]=1
+#										
+#		location_Matrix= tempLocationMatrix.copy()
+#		
+#		shapeInfo["Link" + str(i)] = [[length,width,height], [minimumX, maximumX], [minimumY, maximumY], [minimumZ, maximumZ], shape_choice]
+#		
+#		shapesAdded.append("Link" + str(i))
+#		connections.append([jointPosition_Direction, JoiningLink])
+#		
+#		total_creature_connections[JoiningLink+"_"+"Link" + str(i)]=jointPosition_Direction
+#		self.connections= connections
+#		
+#		
+#		for link in reversed(range(len(self.LinkJoints))):
+#			if ("_"+JoiningLink) in self.LinkJoints[link]:
+#				grandparentLink = self.LinkJoints[link]
+#				grandParAxis = total_creature_connections[grandparentLink]
+#				break
+#			
+#		if(JoiningLink == "Link0"):
+#			if(jointPosition_Direction==0):
+#				pyrosim.Send_Joint(
+#					name=JoiningLink+"_"+"Link" + str(i), 
+#					parent=JoiningLink, 
+#					child="Link" + str(i), type="revolute",
+#					position=[shapeInfo[JoiningLink][0], 
+#						shapeInfo[JoiningLink][0][1]/2,
+#						shapeInfo[JoiningLink][0][2]/2],
+#					jointAxis="1 0 0")
+#			elif(jointPosition_Direction==1):
+#				pyrosim.Send_Joint(
+#					name=JoiningLink+"_"+"Link" + str(i), 
+#					parent=JoiningLink, 
+#					child="Link" + str(i), type="revolute",
+#					position=[shapeInfo[JoiningLink][0][0]/2 , 
+#						shapeInfo[JoiningLink][0][1],
+#						shapeInfo[JoiningLink][0][2]/2],
+#					jointAxis="0 1 0")
+#			elif(jointPosition_Direction==2):
+#				pyrosim.Send_Joint(
+#					name=JoiningLink+"_"+"Link" + str(i), 
+#					parent=JoiningLink, 
+#					child="Link" + str(i), type="revolute",
+#					position=[shapeInfo[JoiningLink][0][0]/2 , 
+#						shapeInfo[JoiningLink][0][1]/2,
+#						shapeInfo[JoiningLink][0][2]],
+#					jointAxis="0 0 1")
+#				
+#		elif(grandParAxis == jointPosition_Direction):
+#			if (jointPosition_Direction == 0):
+#				pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[JoiningLink][0][0],0,0], jointAxis = "1 0 0")
+#			elif (jointPosition_Direction == 1):
+#				pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [0,shapeInfo[JoiningLink][0][1],0], jointAxis = "0 1 0")
+#			elif (jointPosition_Direction == 2):
+#				pyrosim.Send_Joint(name = shapeInfo + "_" + "Link" + str(i) , parent = JoiningLink  , child = "Link" + str(i) , type = "revolute", position = [0,0, shapeInfo[JoiningLink][0][2]], jointAxis = "0 0 1")
+#				
+#		else:
+#			if (grandParAxis == 0):
+#				if (jointPosition_Direction == 1):
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [
+#						shapeInfo[JoiningLink][0][0]/2,
+#						shapeInfo[JoiningLink][0][1]/2,
+#						0], jointAxis = "0 1 0")
+#				else:
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , 
+#						child = "Link" + str(i) ,
+#						type = "revolute", 
+#						position = [shapeInfo[JoiningLink][0][0]/2,
+#							0,
+#							shapeInfo[JoiningLink][0][2]/2], 
+#						jointAxis = "0 0 1")
+#					
+#			elif (grandParAxis == 1):
+#				if (jointPosition_Direction == 0):
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
+#						parent = JoiningLink , 
+#						child = "Link" + str(i) , 
+#						type = "revolute",
+#						position = [shapeInfo[JoiningLink][0][0]/2,
+#						shapeInfo[JoiningLink][0][1]/2,
+#						0], jointAxis = "0 1 0")
+#				else:
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
+#						parent = JoiningLink , 
+#						child = "Link" + str(i) , 
+#						type = "revolute",
+#						position = [0, 
+#							shapeInfo[JoiningLink][0][1]/2,
+#							shapeInfo[JoiningLink][0][2]/2], 
+#						jointAxis = "0 0 1")
+#			else:
+#				if (jointPosition_Direction == 0):
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
+#						parent = JoiningLink , 
+#						child = "Link" + str(i) , 
+#						type = "revolute",
+#						position = [
+#							shapeInfo[JoiningLink][0][0]/2,
+#							0, 
+#							shapeInfo[JoiningLink][0][2]/2], 
+#						jointAxis = "1 0 0")
+#				else:
+#					pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , 
+#						parent = JoiningLink , 
+#						child = "Link" + str(i) , 
+#						type = "revolute",
+#						position = [0, 
+#							shapeInfo[JoiningLink][0][1]/2,
+#							shapeInfo[JoiningLink][0][2]/2], 
+#						jointAxis = "0 0 1")
+#					
+#		if (jointPosition_Direction == 0):
+#			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[length/2,0,0], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
+#		elif (jointPosition_Direction == 1):
+#			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[0,width/2,0], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
+#			
+#		else:
+#			self.Send_Shape(shape_choice, name = "Link" + str(i), pos=[0,0,height/2], size=[length, width, height],mass=1.0, material_name = color_name, rgba=rgba_string )
+##		self.shapeInfo = shapeInfo
+##		self.total_creature_connections = total_creature_connections
+##		self.shapesAdded = shapesAdded
+#			
 			
 			
 		self.shapeInfo = shapeInfo
 		self.total_creature_connections = total_creature_connections
 		self.sensorNeuronList = sensorNeuronList
 		self.shapesAdded = shapesAdded
+		self.locationMatrix=locationMatrix.copy()
 		
 		self.numSensorNeurons = sensorNeuronList.count(1)
 		#self.numMotorNeurons = len(self.motorNeurons)
@@ -388,30 +390,32 @@ class SOLUTION:
 		self.sensorNeuronList=[]
 		self.LinkJoints=[]
 		location_Matrix=self.locationMatrix
-		shape_List=['sphere'] #, 'cube'
+		#shape_List=['sphere', 'cube']
 		
 		
 		number_of_links= random.randint(3,c.maxLinks)
-		self.sensorNeurons= [random.randint(0,1) for _ in range (number_of_links)]
-		print(self.sensorNeurons)
+		print('numberofLinks', number_of_links)
+		self.sensorNeuronList= [random.randint(0,1) for _ in range (number_of_links)]
+		print(self.sensorNeuronList)
 		
-#		minimumX=0
-#		minimumY=0
-#		minimumZ=0
-#		
-#		maximumX=0
-#		maximumY=0
-#		maximumZ=0
+		minimumX=0
+		minimumY=0
+		minimumZ=0
+		
+		maximumX=0
+		maximumY=0
+		maximumZ=0
 		
 		for i in range (0, number_of_links):
+			shape_List=['sphere', 'cube']
 			length = random.randint(1,2) 
 			width = random.randint(1,2) 
 			height = random.randint(1,2) 
 			
 			shape_choice=random.choice(shape_List) #shape chosen for each link
+			print('Shape ',i,' : ',shape_choice)
 			
-			
-			if self.sensorNeurons[i]==0: #No Sensor
+			if self.sensorNeuronList[i]==0: #No Sensor
 				color_name=c.color_No_Sensor_Link
 				rgba_string=c.rgba_No_Sensor_Link 
 			else:
@@ -419,8 +423,8 @@ class SOLUTION:
 				rgba_string=c.rgba_Sensor_Link 
 				
 			if shape_choice=='sphere':
-				length=int((width/2))
-				height=int((width/2))
+				length=int(math.ceil(width/2))
+				height=int(math.ceil(width/2))
 				width=width
 				
 			if (i == 0):
@@ -660,15 +664,16 @@ class SOLUTION:
 		
 		
 	def Create_Brain(self):
-		pyrosim.Start_NeuralNetwork(f"brain/brain{self.myID}.nndf")
-		self.numSensorNeurons=self.sensorNeurons.count(1)
+		pyrosim.Start_NeuralNetwork(f"brain/brain"+str(self.myID)+".nndf")
+		print('listbrain', self.sensorNeuronList)
+		self.numSensorNeurons=self.sensorNeuronList.count(1)
 		self.numMotorNeurons = len(self.motorNeurons)
 		self.weights = np.random.rand(self.numSensorNeurons,self.numMotorNeurons) * 2 - 1
-		print(self.numSensorNeurons,self.numMotorNeurons)
+		print('Sensors: ',self.numSensorNeurons,'Motors: ',self.numMotorNeurons)
 		print("synapse_weights: ", self.weights)
 		
 		i=0
-		for link in self.sensorNeurons:
+		for link in self.sensorNeuronList:
 			if link==1:
 				pyrosim.Send_Sensor_Neuron(name = i, linkName = "Link"+str(i))
 				i+=1
@@ -690,7 +695,7 @@ class SOLUTION:
 		pyrosim.End()
 		
 	def Create_Child_Body(self):
-		pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
+		pyrosim.Start_URDF("body/body"+str(self.myID)+".urdf")
 		
 		shapeInfo = self.shapeInfo
 		total_creature_connections =  self.total_creature_connections
@@ -796,19 +801,19 @@ class SOLUTION:
 		
 		
 	def Create_Child_Brain(self):
-		pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
+		pyrosim.Start_NeuralNetwork("brain/brain"+str(self.myID)+".nndf")
 		
 		counter = 0
 		#numSensorNeurons=self.sensorNeurons.count(1)
 		numLinks = len(self.shapesAdded)
 		for i in range(0,numLinks):
-			if (self.sensorNeurons[i] == 1):
+			if (self.sensorNeuronList[i] == 1):
 				pyrosim.Send_Sensor_Neuron(name = counter , linkName = self.shapesAdded[i])
 				counter += 1
 				
 		child_LinkJointLink = self.total_creature_connections.keys()
 		listLJL = list(child_LinkJointLink)
-		self.numSensorNeurons=self.sensorNeurons.count(1)
+		self.numSensorNeurons=self.sensorNeuronList.count(1)
 		for j in range(0,numLinks - 1):
 			pyrosim.Send_Motor_Neuron( name = j + self.numSensorNeurons  , jointName = listLJL[j])
 			
