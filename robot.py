@@ -15,7 +15,7 @@ class ROBOT :
 	def __init__(self,solutionID, objects):
 		print('solutionID : ',solutionID)
 		print('object:',objects)
-		self.robotId = p.loadURDF("body"+str(solutionID)+".urdf", flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
+		self.robotId = p.loadURDF("body"+str(solutionID)+".urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
 		self.motors={}
 		self.sensors={}
 		

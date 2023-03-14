@@ -6,6 +6,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import pickle
 
 class PARALLEL_HILL_CLIMBER :
 	def __init__(self):
@@ -22,14 +23,17 @@ class PARALLEL_HILL_CLIMBER :
 		print('Parents:\n',self.parents)
 		os.system("rm brain/brain*.nndf")
 		#os.system("rm data/fitness*.nndf")
-		os.system("rm data/fitness*.txt")
-		os.system("rm body/body*.urdf")
+		self.currentGeneration=0
+		os.system("rm fitness*.txt")
+		os.system("rm body*.urdf")
 		
 	def Evolve(self):
-		self.Evaluate(solutions=self.parents, child_true=0)
+		self.Evaluate(solutions=self.parents, child_true=0,currentGeneration= self.currentGeneration)
 		
-		for currentGeneration in range(c.numberOfGenerations):
-			self.Evolve_For_One_Generation()
+		for currentGeneration in range(0, self.currentGeneration):
+			self.currentGeneration=+1
+			
+			self.Evolve_For_One_Generation(self.currentGeneration)
 
 			
 	def Print(self):
@@ -38,17 +42,20 @@ class PARALLEL_HILL_CLIMBER :
 			print(f'parent fitness {self.parents[i].fitness} child fitness {self.children[i].fitness}')
 		print("\n")
 		
-	def Evaluate(self,solutions, child_true):
-		for i in range(c.populationSize):
-			solutions[i].Start_Simulation("DIRECT", child_true)
+	def Evaluate(self,solutions, child_true, currentGeneration):
+		for i in solutions:
+			if(currentGeneration % 10 == 0):
+				solutions[i].Start_Simulation("GUI", child_true)
+			else:
+				solutions[i].Start_Simulation("DIRECT", child_true)
+		for j in solutions:
+			self.fitness.append(solutions[j].Wait_For_Simulation_To_End())
+		
 			
-		for i in range(c.populationSize):
-			self.fitness.append(solutions[i].Wait_For_Simulation_To_End())
-			
-	def Evolve_For_One_Generation(self):
+	def Evolve_For_One_Generation(self, currentGeneration):
 		self.Spawn()
 		self.Mutate()
-		self.Evaluate(self.children, 1)
+		self.Evaluate(self.children, 1, currentGeneration)
 		self.Print()
 		self.Select()
 		
@@ -104,6 +111,10 @@ class PARALLEL_HILL_CLIMBER :
 		print("Best Parent:",self.parents[bestParent_Key].fitness)
 		
 		self.parents[bestParent_Key].Start_Simulation('GUI',1)
+		
+		with open('data/fitnessValues{0}_{1}_best.pkl'.format(str(c.numpyseed), str(c.randomseed)), 'wb') as f:
+			pickle.dump(self.parents[bestParent_Key], f)
+			f.close()
 		
 	
 	def store_best_fitness(self):

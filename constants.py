@@ -13,10 +13,10 @@ import pandas as pd
 
 
 
-iter=10000 #iteration times
+iter=100 #iteration times
 
-numpyseed=50
-randomseed=600
+numpyseed=200
+randomseed=60
 np.random.seed(numpyseed)
 random.seed(randomseed)
 
@@ -29,16 +29,16 @@ df=pd.DataFrame()
 
 
 populationSize= 5
-numberOfGenerations= 1
+numberOfGenerations= 90+1
 
 motorJointRange=0.7
 
-maxLinks=15
+maxLinks=8
 #maxLinkSize = 1
 
 color_No_Sensor_Link= 'Blue'
 rgba_No_Sensor_Link= '0.0 0.0 1.0 1.0'
-maxLinks=15
+
 
 #number_of_links= random.randint(5,maxLinks)
 #randSensorsList = [random.randint(0,1) for _ in range (number_of_links)]

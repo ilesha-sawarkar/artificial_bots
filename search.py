@@ -7,11 +7,13 @@ import pandas as pd
 
 phc = PARALLEL_HILL_CLIMBER()
 phc.Evolve()
+print('Storing')
 phc.store_best_fitness()
 data=c.df
 print('Saving')
 print(data)
 data.to_csv('fitness_valuesRuns.csv', index=False)
+print('Done')
 input("Press Enter To Continue")
 phc.Show_Best()
 #pd.to_csv('data/fitness_valuesRuns.csv', c.df)
