@@ -29,7 +29,7 @@ fitness_Values=[]
 
 
 populationSize= 10
-numberOfGenerations= 100
+numberOfGenerations= 10
 
 x_cordinates= [i for i in range(numberOfGenerations+1)]
 df=pd.DataFrame()
@@ -37,7 +37,7 @@ df['Generation']=x_cordinates
 
 motorJointRange=0.7
 
-maxLinks=8
+maxLinks=10
 #maxLinkSize = 1
 
 color_No_Sensor_Link= 'Blue'

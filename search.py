@@ -5,10 +5,11 @@ import constants as c
 import pandas as pd
 import gc
 
-list_numpyseed=[600, 20,90,70,80]
-list_randomseed=[1000,29000,6000,90000,100]
+list_numpyseed=[900]  #6000, 200
+list_randomseed=[10000] #1000,29000
+folder='control' #'experiment'
 
-for i in range (0,5):
+for i in range (len(list_numpyseed)):
     gc.collect()
     
     c.numpyseed=list_numpyseed[i]
@@ -22,12 +23,13 @@ for i in range (0,5):
     data=c.df
     print('Saving')
     print(data)
-    filename='fitness_valuesRuns'+str(i)
+    filename=folder+'/'+'fitness_valuesRuns'+str(i)
     data.to_csv(filename+'.csv', index=False)
     print('Done')
     input("Press Enter To Continue")
     phc.Show_Best()
     gc.collect()
+    
 
 
 
