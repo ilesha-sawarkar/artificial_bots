@@ -12,6 +12,7 @@ data=c.df
 print('Saving')
 print(data)
 data.to_csv('fitness_valuesRuns.csv', index=False)
+input("Press Enter To Continue")
 phc.Show_Best()
 #pd.to_csv('data/fitness_valuesRuns.csv', c.df)
 

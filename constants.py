@@ -13,10 +13,10 @@ import pandas as pd
 
 
 
-iter=100000 #iteration times
+iter=10000 #iteration times
 
-numpyseed=5
-randomseed=700
+numpyseed=50
+randomseed=600
 np.random.seed(numpyseed)
 random.seed(randomseed)
 
@@ -28,8 +28,8 @@ df=pd.DataFrame()
 
 
 
-populationSize= 1
-numberOfGenerations= 20
+populationSize= 5
+numberOfGenerations= 1
 
 motorJointRange=0.7
 

@@ -13,11 +13,13 @@ import os
 
 class ROBOT :
 	def __init__(self,solutionID, objects):
-		self.robotId = p.loadURDF("body/body"+str(solutionID)+".urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
+		print('solutionID : ',solutionID)
+		print('object:',objects)
+		self.robotId = p.loadURDF("body"+str(solutionID)+".urdf", flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
 		self.motors={}
 		self.sensors={}
 		
-		self.nn = NEURAL_NETWORK(f"brain/brain"+str(solutionID)+".nndf")
+		self.nn = NEURAL_NETWORK("brain/brain"+str(solutionID)+".nndf")
 		
 		self.solutionID=solutionID
 		self.world_objects=objects
@@ -26,7 +28,7 @@ class ROBOT :
 		self.Prepare_To_Act()
 		
 		os.system(f"rm brain/brain"+str(solutionID)+".nndf")
-		os.system(f"rm body/body"+str(solutionID)+".urdf")
+		os.system(f"rm body"+str(solutionID)+".urdf")
 		#self.fitnessArray = []
 		
 
@@ -89,11 +91,12 @@ class ROBOT :
 		yPosition_Target  = position[1]
 		height_Target  = position[2]
 		distance = np.sqrt((xPosition_Target-xPositionRobot)**2 + (yPosition_Target-yPositionRobot)**2)
-		fitness_file = open(f"data/tmp{self.solutionID}.txt", "w")
+		fitness_file = open(f"fitness"+ str(self.solutionID)+ ".txt", "w")
 		fitness_file.write(str(distance))
 		
 		#c.fitness_Values.append(distance)
 		
-		os.system(f"mv data/tmp{self.solutionID}.txt data/fitness{self.solutionID}.txt")
+		#os.system(f"mv data/fitness" + str(self.solutionID) + ".txt")
+		print('\nHere')
 		fitness_file.close()
 				

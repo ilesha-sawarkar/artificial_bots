@@ -59,7 +59,7 @@ class PARALLEL_HILL_CLIMBER :
 	def Spawn(self):
 		self.children = {}
 		for key in self.parents:
-			self.children[key] = copy.deepcopy(parent[key])
+			self.children[key] = copy.deepcopy(self.parents[key])
 			self.children[key].myID = self.nextAvailableID
 			self.nextAvailableID += 1
 			#	self.children[key] = copy.deepcopy(self.parents[parent])
@@ -122,7 +122,7 @@ class PARALLEL_HILL_CLIMBER :
 				counter = 0
 				
 		for i in range(len(best_fitness)):
-			best_fitness[i] = int(best_fitness[i] * 1) #-1
+			best_fitness[i] = best_fitness[i] * -1 #-1
 		col_name=str(c.col)
 		c.df[col_name] = best_fitness
 		c.col=c.col+1

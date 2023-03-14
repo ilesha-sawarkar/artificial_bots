@@ -27,6 +27,7 @@ class SIMULATION :
 		
 		p.setAdditionalSearchPath(pybullet_data.getDataPath())
 		
+		
 		p.setGravity(0,0,-9.8)
 		self.world = WORLD()
 		self.robot = ROBOT(solutionID,self.world.objects)
@@ -49,6 +50,6 @@ class SIMULATION :
 			self.robot.Save_Values()#	
 	
 	def Get_Fitness(self):
-		print(self.world.objects)
+		#print(self.world.objects)
 		self.robot.Get_Fitness(self.world.objects)
 		
