@@ -29,7 +29,7 @@ df=pd.DataFrame()
 
 
 populationSize= 5
-numberOfGenerations= 90+1
+numberOfGenerations= 9
 
 motorJointRange=0.7
 

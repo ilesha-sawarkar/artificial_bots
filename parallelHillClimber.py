@@ -44,8 +44,11 @@ class PARALLEL_HILL_CLIMBER :
 		
 	def Evaluate(self,solutions, child_true, currentGeneration):
 		for i in solutions:
-			if(currentGeneration % 10 == 0):
-				solutions[i].Start_Simulation("GUI", child_true)
+			solutions[i].Start_Simulation("GUI", child_true)
+
+			if(currentGeneration % 10 == 0 or currentGeneration==0):
+				pass
+				#solutions[i].Start_Simulation("GUI", child_true)
 			else:
 				solutions[i].Start_Simulation("DIRECT", child_true)
 		for j in solutions:

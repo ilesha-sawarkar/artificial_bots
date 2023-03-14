@@ -16,7 +16,7 @@ data.to_csv('fitness_valuesRuns.csv', index=False)
 print('Done')
 input("Press Enter To Continue")
 phc.Show_Best()
-#pd.to_csv('data/fitness_valuesRuns.csv', c.df)
+pd.to_csv('data/fitness_valuesRuns.csv', c.df)
 
 
 #for i in range(0,2):
