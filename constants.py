@@ -15,8 +15,8 @@ import pandas as pd
 
 iter=100 #iteration times
 
-numpyseed=0
-randomseed=0
+numpyseed=8000
+randomseed=100
 np.random.seed(numpyseed)
 random.seed(randomseed)
 

@@ -5,8 +5,8 @@ import constants as c
 import pandas as pd
 import gc
 
-list_numpyseed=[900]  #6000, 200
-list_randomseed=[10000] #1000,29000
+list_numpyseed=[800]  #6000, 200
+list_randomseed=[5000] #1000,29000
 folder='control' #'experiment'
 
 for i in range (len(list_numpyseed)):

@@ -71,7 +71,7 @@ class PARALLEL_HILL_CLIMBER :
 		self.children = {}
 		for key in self.parents:
 			self.children[key] = copy.deepcopy(self.parents[key])
-			self.children[key].Set_ID()
+			#self.children[key].Set_ID()
 			self.children[key].myID = self.nextAvailableID
 			self.nextAvailableID += 1 
 			#	self.children[key] = copy.deepcopy(self.parents[parent])
