@@ -12,6 +12,8 @@ from collections import Counter
 
 np.random.seed(c.numpyseed)
 random.seed(c.randomseed)
+print('SEED', c.numpyseed)
+print('Seeed', c.randomseed)
 
 class SOLUTION:
 	def __init__(self, ID):
@@ -53,7 +55,8 @@ class SOLUTION:
 		self.myID += 1
 	
 	def Start_Simulation(self, directOrGui, child_true=0):
-		self.Create_World()
+		if (self.myID == 0):
+			self.Create_World()
 		if (child_true == 1):
 			self.Create_Child_Body()
 			self.Create_Child_Brain()
@@ -98,8 +101,8 @@ class SOLUTION:
 		shape_choice=random.choice([ 'cube','sphere']) #shape chosen for each link
 			
 		if shape_choice=='sphere':
-			length=int((width))
-			height=int((width))
+			length=int(width)
+			height=int(width)
 			width=width
 			print('Here', shape_choice)
 			
@@ -107,6 +110,7 @@ class SOLUTION:
 		
 	
 	def Mutate(self):
+		#pyrosim.Start_URDF(f"body"+str(self.myID)+".urdf")
 		shapeInfo = self.shapeInfo
 		total_creature_connections =  self.total_creature_connections
 		sensorNeuronList = self.sensorNeuronList
@@ -117,11 +121,11 @@ class SOLUTION:
 		connections = self.connections
 		
 		add_remove_none = 2
-		if len(list(child_links)) > 3 and len(list(child_links)) < c.max_links:
+		if len(list(child_links)) > 3 and len(list(child_links)) < c.maxLinks:
 			add_remove_none = random.choice([0, 1, 2])
 			# add_remove_none = 0
 		
-		elif len(list(child_links)) > 3 and len(list(child_links)) >= c.max_links:
+		elif len(list(child_links)) > 3 and len(list(child_links)) >= c.maxLinks:
 			add_remove_none = random.choice([0, 2])
 		elif  len(list(child_links)) < 3:
 			add_remove_none = random.choice([1, 2])
@@ -162,7 +166,7 @@ class SOLUTION:
 			sensorNeuronList.append(sensor_val)
 			
 			length, width, height, shape_choice = self.initialize_shape_and_dimensions()
-			
+			flag2=1
 			
 			if sensor_val==0: #No Sensor
 				color_name=c.color_No_Sensor_Link
@@ -302,7 +306,7 @@ class SOLUTION:
 						minimumY = MidPointY - width/2
 						maximumY = minimumY + width
 						
-						minimumZ = JoiningLink_Y_MaxMin[1]
+						minimumZ = JoiningLink_Z_MaxMin[1]
 						maximumZ = minimumZ + height
 						if (minimumX < 0) or (minimumY < 0) or (minimumZ < 0):
 							flag2 = 1
@@ -361,7 +365,7 @@ class SOLUTION:
 							inner_flag1 = 1
 							
 						for x in range(1,math.floor(maximumX) - math.floor(minimumX)+1):
-							for y in range(math.ceil(minimumY) - math.floor(minimumY)):
+							for y in range(math.ceil(maximumY) - math.floor(minimumY)):
 								for z in range(math.ceil(maximumZ) - math.floor(minimumZ)):
 									
 									if (x == 0) or (y == 0) or (z == 0):
@@ -395,8 +399,10 @@ class SOLUTION:
 					elif jointPosition_Direction == 4:
 						minimumX = MidPointX - length/2
 						maximumX = minimumX + length
+
 						maximumY = JoiningLink_Y_MaxMin[0]
 						minimumY = maximumY - width
+
 						minimumZ = MidPointZ - height/2
 						maximumZ = minimumZ + height
 						
@@ -498,7 +504,7 @@ class SOLUTION:
 					break
 			print("Link" + str(i))
 			locationMatrix = tempLocationMatrix.copy()
-			shapeInfo["Link" + str(i)] = [length, width, height,[minimumX,maximumX],[minimumY,maximumY],[minimumZ,maximumZ]]
+			shapeInfo["Link" + str(i)] = [[length, width, height],[minimumX,maximumX],[minimumY,maximumY],[minimumZ,maximumZ],shape_choice]
 			print(shapeInfo)
 			
 			shapesAdded.append("Link" + str(i))
@@ -536,12 +542,13 @@ class SOLUTION:
 		
 		row =  random.randint(0,self.numSensorNeurons - 1)
 		
-		numLinks = len(shapesAdded)
+		#numLinks = len(shapesAdded)
 		col = random.randint(0,self.numMotorNeurons-1)
 		#col = random.randint(0,numLinks - 1)
-		print(self.weights)
+		print(row,col)
+		print('Weights,\n',self.weights)
 		self.weights[row][col]  =  random.random() * 2 - 1		
-		
+		#pyrosim.End()
 	
 	
 	def Send_Shape(self, shape, name, pos, size, mass, material_name , rgba):
@@ -1066,6 +1073,7 @@ class SOLUTION:
 						self.motorNeuronList.append(JoiningLink+"_"+"Link" + str(i))	
 					# Negative Grand Axises
 					elif (grandParAxis == 3):
+						
 						if (jointPosition_Direction == 1):
 							pyrosim.Send_Joint(name = JoiningLink + "_" + "Link" + str(i) , parent = JoiningLink , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[JoiningLink][0][0]/2), shapeInfo[JoiningLink][0][1]/2, 0], jointAxis = "0 1 0")
 						elif (jointPosition_Direction == 2):
@@ -1111,6 +1119,7 @@ class SOLUTION:
 					
 				self.LinkJoints.append(JoiningLink + "_" + "Link" + str(i))
 		self.shapeInfo = shapeInfo
+		print('Shapppppeeee parent',self.shapeInfo)
 		self.total_creature_connections = total_creature_connections
 		self.shapesAdded = shapesAdded
 		self.locationMatrix=locationMatrix.copy()
@@ -1127,7 +1136,7 @@ class SOLUTION:
 		print('listbrain', self.sensorNeuronList)
 		self.numSensorNeurons=self.sensorNeuronList.count(1)
 		self.numMotorNeurons = len(self.motorNeuronList)
-		self.weights = (np.random.rand(self.numSensorNeurons,self.numMotorNeurons)) * 2 - 1
+		#self.weights = (np.random.rand(self.numSensorNeurons,self.numMotorNeurons)) * 2 - 1
 		print('Sensors: ',self.numSensorNeurons,'Motors: ',self.numMotorNeurons)
 		print("synapse_weights: ", self.weights)
 		
@@ -1167,6 +1176,8 @@ class SOLUTION:
 		counter = 0
 		
 		for link in shapesAdded:
+			print('Shapppppeeee child',shapeInfo)
+			print('\n\n', shapeInfo[link])
 			length = shapeInfo[link][0][0]
 			width = shapeInfo[link][0][1]
 			height = shapeInfo[link][0][2]

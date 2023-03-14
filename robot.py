@@ -13,6 +13,7 @@ import os
 
 class ROBOT :
 	def __init__(self,solutionID, objects):
+		#pyrosim.End()
 		print('solutionID : ',solutionID)
 		print('object:',objects)
 		self.robotId = p.loadURDF("body"+str(solutionID)+".urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
@@ -91,6 +92,7 @@ class ROBOT :
 		yPosition_Target  = position[1]
 		height_Target  = position[2]
 		distance = np.sqrt((xPosition_Target-xPositionRobot)**2 + (yPosition_Target-yPositionRobot)**2)
+		print('Distance: ', distance)
 		fitness_file = open(f"fitness"+ str(self.solutionID)+ ".txt", "w")
 		fitness_file.write(str(distance))
 		
@@ -99,4 +101,5 @@ class ROBOT :
 		#os.system(f"mv data/fitness" + str(self.solutionID) + ".txt")
 		print('\nHere')
 		fitness_file.close()
+		exit()
 				

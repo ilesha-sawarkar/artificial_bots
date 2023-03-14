@@ -9,12 +9,13 @@ import os
 import pickle
 
 class PARALLEL_HILL_CLIMBER :
-	def __init__(self):
+	def __init__(self, runCount):
 		
 		self.parents = {}
 		
 		#self.parent = SOLUTION()	
 		self.nextAvailableID = 0
+		self.runCount= runCount
 		self.fitness=[]
 		self.best_fitness_runs=[]
 		for i in range(c.populationSize):
@@ -30,7 +31,7 @@ class PARALLEL_HILL_CLIMBER :
 	def Evolve(self):
 		self.Evaluate(solutions=self.parents, child_true=0,currentGeneration= self.currentGeneration)
 		
-		for currentGeneration in range(0, self.currentGeneration):
+		for currentGeneration in range(0, c.numberOfGenerations):
 			self.currentGeneration=+1
 			
 			self.Evolve_For_One_Generation(self.currentGeneration)
@@ -70,8 +71,9 @@ class PARALLEL_HILL_CLIMBER :
 		self.children = {}
 		for key in self.parents:
 			self.children[key] = copy.deepcopy(self.parents[key])
+			self.children[key].Set_ID()
 			self.children[key].myID = self.nextAvailableID
-			self.nextAvailableID += 1
+			self.nextAvailableID += 1 
 			#	self.children[key] = copy.deepcopy(self.parents[parent])
 			#	self.children[key].myID = self.nextAvailableID
 			#	self.nextAvailableID += 1
@@ -121,7 +123,7 @@ class PARALLEL_HILL_CLIMBER :
 		
 	
 	def store_best_fitness(self):
-		x_cordinates= [i for i in range(c.numberOfGenerations+1)]
+		
 		
 		fitness_population = []
 		counter = 0
@@ -137,9 +139,14 @@ class PARALLEL_HILL_CLIMBER :
 				
 		for i in range(len(best_fitness)):
 			best_fitness[i] = best_fitness[i] * -1 #-1
-		col_name=str(c.col)
+		col_name=str(self.runCount)
+		
 		c.df[col_name] = best_fitness
-		c.col=c.col+1
+		#c.col=c.col+1
+		
+		with open('data/fitnessValues{0}_{1}.pkl'.format(str(c.numpyseed), str(c.randomseed)), 'wb') as f:
+			pickle.dump(best_fitness, f)
+			f.close()
 #			
 #		ypoints = best_fitness
 #		font1 = {'family':'serif','color':'blue','size':20}

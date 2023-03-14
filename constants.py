@@ -15,21 +15,25 @@ import pandas as pd
 
 iter=100 #iteration times
 
-numpyseed=200
-randomseed=60
+numpyseed=0
+randomseed=0
 np.random.seed(numpyseed)
 random.seed(randomseed)
 
 col=1
 
 fitness_Values=[]
+
+
+
+
+
+populationSize= 10
+numberOfGenerations= 100
+
+x_cordinates= [i for i in range(numberOfGenerations+1)]
 df=pd.DataFrame()
-
-
-
-
-populationSize= 5
-numberOfGenerations= 9
+df['Generation']=x_cordinates
 
 motorJointRange=0.7
 
