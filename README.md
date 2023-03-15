@@ -46,7 +46,7 @@
    * From the experiments performed we can see that Prismatic joint has better capabilities. It can enable the body to move better and faster than compare to Revolute Joints. This is possible because of the up and down movement of the joint.
 
 ## 4. Graphs :chart_with_upwards_trend:
-* Fitness graphs are calculated for both experimental and control.
+* Fitness graphs are calculated for both experimental and control. These fitness graph represent the distance between the goal (block) and our creature.
 
 ### Graph for Control Creature with Revolute Joints
 * The fitnessFunction is plotted on the y axis and the generation on the x axis.
@@ -109,6 +109,9 @@
 
      <img width="441" alt="Screenshot 2023-02-20 at 11 06 08 PM" src="https://user-images.githubusercontent.com/114837040/220252645-7671ce8b-e035-4910-9cc3-e97b2810a3dc.png">
      
+     
+     <img width="405" alt="Screenshot 2023-03-15 at 10 59 24 AM" src="https://user-images.githubusercontent.com/114837040/225369035-e213050b-9f3b-41ef-baf3-c3f4b808f02d.png">
+
      
 
 ## 8. Generation of Brain
@@ -176,6 +179,7 @@
 ## 13. Fitness Function :chart_with_upwards_trend:
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
    * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
+   * Additionally the fitness function also takes in the coordinates of the world object and finds the associate difference in distance at each evolution to ensure the creature moves closer to the objects in the world.
    * Change joint_type as revolute for control and prismatic for experimental in solution.py
    * The best solutions are pickled in the respective data folder with the associated numpy seed
   
