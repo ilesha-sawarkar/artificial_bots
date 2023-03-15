@@ -96,8 +96,7 @@
    * We can then iterate and adjust the weights which are used to Send the synapse(movement) to the joints
    * Below is the flowchart depicting the generation of brains.
 
-   <img width="873" alt="Screenshot 2023-02-20 at 11 22 51 PM" src="https://user-images.githubusercontent.com/114837040/220254859-ca949f50-d940-45d5-b417-80a99e521fd5.png">
-
+  <img width="757" alt="Screenshot 2023-03-14 at 10 09 50 PM" src="https://user-images.githubusercontent.com/114837040/225196003-8047518f-f15d-49c5-beb8-e631d55bd0d7.png">
 
 ## 9. How the Creatures are Evolved
 
@@ -130,6 +129,7 @@
     * A constraint is added so that a link is not deleted whose subchildren are present in the urdf.
     * If the link has children than another link is chosen randomly to prevent errors since joints have a hierachy.
     * 
+
 
 ## 10. Animation of 3D Creature
    * [Youtube Link](https://youtu.be/iVttcKXFOvs)
