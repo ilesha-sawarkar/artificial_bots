@@ -11,7 +11,7 @@
 3. [Findings](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#3-findings) 
 4. [Graphs](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#4-graphs-chart_with_upwards_trend)
 5. [About The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#5-about-the-code)
-6. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#6-random-shapes-generated
+6. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#6-random-shapes-generated)
 7. [Generation of Body](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#7-generation-of-body)
 8. [Generation of Brain](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#8-generation-of-brain)
 9. [How Creatures are Evolved](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#9-how-the-creatures-are-evolved)
