@@ -29,8 +29,8 @@ fitness_Values=[]
 
 
 
-populationSize= 1
-numberOfGenerations= 10
+populationSize= 10
+numberOfGenerations= 500
 
 x_cordinates= [i for i in range(numberOfGenerations+1)]
 df=pd.DataFrame()
