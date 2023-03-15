@@ -32,7 +32,7 @@
       * Moreover at each generation the Mutate function had a randomized option of either appending a link to the creatures, deleting a link or to not make any changes.
       
    2) Experimental
-      * The experimental was similar to control except that the joints that were added in positive and negative direction of the creature in the x and y axises had a revolute type of joint.
+      * The experimental was similar to control except that the joints that were added in positive and negative direction of the creature in the x and y axises had a **prismatic joint type**.
 
 ## 3. Findings
    * From the experiments performed we can see that ________ joint has better capapbilities. It can enable the body to move better and faster than compare to ---------. This is possible because of the -------- movement of the joint.
