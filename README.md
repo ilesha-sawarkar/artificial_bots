@@ -30,7 +30,7 @@
 ## 2. Experiments Performed
    1) Control
       * The control creature had revolute joints specified as joint types
-      * The creature was evolved to 200 generations with a populationSize of 10 with 5 randomSeeds at each iteration.
+      * The creature was evolved to 500 generations with a populationSize of 10 with 5 randomSeeds at each iteration.
       * The Control Creature was built with a randomization of shapes and shape dimension lengths.
       * Moreover at each generation the Mutate function had a randomized option of either appending a link to the creatures, deleting a link or to not make any changes.
       
@@ -38,7 +38,7 @@
       * The experimental was similar to control except that the joints that were added in positive and negative direction of the creature in the x and y axises had a **prismatic joint type**.
 
 ## 3. Findings
-   * From the experiments performed we can see that ________ joint has better capapbilities. It can enable the body to move better and faster than compare to ---------. This is possible because of the -------- movement of the joint.
+   * From the experiments performed we can see that Prismatic joint has better capabilities. It can enable the body to move better and faster than compare to Revolute Joints. This is possible because of the up and down movement of the joint.
 
 ## 4. Graphs :chart_with_upwards_trend:
 
