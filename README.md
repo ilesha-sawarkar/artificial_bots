@@ -6,17 +6,20 @@
 
 ## Table of Contents
 
-1. [Hypothesis] (
-2. [Experiments Performed]
-3. [How To Run The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#1--how-to-run-the-code) 
-
-2. [Details About The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#2-details-about-the-code)
-3. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#3-random-shapes-generated)
-4. [Generation of Body](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#4-generation-of-body)
-5. [Generation of Brain](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#4-generation-of-body)
-6. [Animation of 3D Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#6-animation-of-3d-creature)
-7. [Fitness Function](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#4-fitness-function)
-8. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#5-citations-for-references-used-to-buil-this-project)
+1. [Hypothesis] (https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#1-hypothesis)
+2. [Experiments Performed] (https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#2-experiments-performed)
+3. [Findings](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#3-findings) 
+4. [Graphs]()
+5. [About The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#4-about-the-code)
+6. [How Creatures Are Evolved](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#5-how-the-creatures-are-evolved)
+7. 
+8. [Details About The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#2-details-about-the-code)
+9. [Random Shapes Generated](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#3-random-shapes-generated)
+10. [Generation of Body](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#4-generation-of-body)
+11. [Generation of Brain](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#4-generation-of-body)
+12. [Animation of 3D Creature](https://github.com/ilesha-sawarkar/artificial_bots/blob/Random-3D-Creature/README.md#6-animation-of-3d-creature)
+13. [Fitness Function](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#4-fitness-function)
+14. [Citations](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#5-citations-for-references-used-to-buil-this-project)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
