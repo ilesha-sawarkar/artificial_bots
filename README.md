@@ -22,7 +22,7 @@
 
 
 ## 1. Hypothesis
-**"Do *Prismatic Joints* enable *Faster* :running: movement than the Revolute joints"**
+:pushpin: **"Do *Prismatic Joints* enable *Faster* :running: movement than the Revolute joints"** :pushpin:
 
 ## 2. Experiments Performed
    1) Control
@@ -100,7 +100,7 @@
    <img width="814" alt="Screenshot 2023-02-20 at 10 16 27 PM" src="https://user-images.githubusercontent.com/114837040/220246470-70a84778-34e6-45b4-a17b-44154798a56f.png">
    
 
-## 7. Fitness Function
+## 7. Fitness Function :chart_with_upwards_trend:
    * The fitness function at each generation is updating the parent's fitness by check the best fitness value for each of its child. The best fitness value of the child is taken as a new parent to generate more children at the the next generation.
    * The fitness function helps evolve the morphology to walk in x-coordinate direction by taking xPosition in the Get_Fitness() in the robot.py file.
 
@@ -110,7 +110,7 @@
    To run the code just run the program search.py from any after cloning the repository to your local machine.
 
 
-   Another option is to run the code "python3 search.py" from the terminal or command line window. Run this command after using cd and runnning this command from the directory where you have stored your cloned repository on your local machine.
+   Another option is to run the code "python3 search.py" from the terminal or command line window. Run this command after using cd and runnning this command from the directory :file_folder: where you have stored your cloned repository on your local machine.
    
 
 ## 8. References used to build this project
