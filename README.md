@@ -1,9 +1,9 @@
 # artificial_bots
 
-##Inspiration
-Evolution is found in nature in **various different ways**. Some creatures evolve to have a **huge torso and small limbs some evolve to have fins.** Some genetic modification help creatures run faster. This sparked my curiosity to evolve the random generated morphologies to check how they behave when we change the way the joints.
+## Inspiration
+*Evolution is found in nature in **various different ways**. Some creatures evolve to have a **huge torso and small limbs some evolve to have fins.** Some genetic modification help creatures run faster. This sparked my curiosity to evolve the random generated morphologies to check how they behave when we change the way the joints.*
 
-##Hypothesis
+## Hypothesis
 **"Do *Prismatic Joints* enable faster movement than the Revolute joints"**
 
 
