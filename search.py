@@ -7,7 +7,7 @@ import gc
 
 list_numpyseed=[6000]  #6000, 200
 list_randomseed=[1000] #1000,29000
-folder='control/Run1' #'experiment'
+folder='experiment/Run1' #'experiment'
 
 for i in range (len(list_numpyseed)):
     gc.collect()
