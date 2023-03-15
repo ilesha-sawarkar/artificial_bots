@@ -184,3 +184,4 @@
 ## 14. References used to build this project
    *  [LudoBots](https://www.reddit.com/r/ludobots/wiki/installation/)
    *  [Pyrosim](https://github.com/jbongard/pyrosim)
+   *  [Joint Image Used in Video](https://blogs.aalto.fi/jarivepsalainen/2021/01/28/three-types-of-legs/)
