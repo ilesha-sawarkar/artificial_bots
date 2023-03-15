@@ -27,7 +27,7 @@
 ## 2. Experiments Performed
    1) Control
       * The control creature had revolute joints specified as joint types
-      * The creature was evolved to 500 generations with a populationSize of 10 with 5 randomSeeds at each iteration.
+      * The creature was evolved to 200 generations with a populationSize of 10 with 5 randomSeeds at each iteration.
       * The Control Creature was built with a randomization of shapes and shape dimension lengths.
       * Moreover at each generation the Mutate function had a randomized option of either appending a link to the creatures, deleting a link or to not make any changes.
       
@@ -39,23 +39,62 @@
 
 
 
+## 4. About The Code
+   ### Body
+ * Initially a matrix is created to find all possible empty spaces in the 3d morphospace.
+ * * If there is space in the world a cube, sphere or cuboid is added.
+ * Accordingly the height, width, length is calculated with respect to each dimension and cuboidal space.
+ * Pictographical representation of links and joints
+ * The code generate random morphologies by linking them using joints.
+ * It starts with the function Create_Body() where a random number of links is decided for the morphology.
+ * Following which a list of randomly placed 0's and 1's are generated that depict the sensor values of the morphology.
+ * Using this information we visually seperate the **links with sensors** as *Green* and the **links without sensors** as *Blue*.
+ * **Additionally:**
+   * I have added a *randomization of dimensions* at each link.
+   * I have added a *randomization of shapes* at each link.
+   * I have added a *randomization of the direction* at which a link will be appending to the main initial link to create 3D creatures.
 
-## 2. Details About The Code
+ ### Brain
 
-  * The code generate random morphologies by linking them using joints.
-  * It starts with the function Create_Body() where a random number of links is decided for the morphology.
-  * Following which a list of randomly placed 0's and 1's are generated that depict the sensor values of the morphology.
-  * Using this information we visually seperate the **links with sensors** as *Green* and the **links without sensors** as *Blue*.
-  * **Additionally:**
-    * I have added a *randomization of dimensions* at each link.
-    * I have added a *randomization of shapes* at each link.
-    * I have added a *randomization of the direction* at which a link will be appending to the main initial link to create 3D creatures.
-   
   * In the Create_Brain()
      * The list of sensors and motors are used to generate synapses and adjust the weights of each neuron.
      * Sensor and motor neurons are named as per the naming pattern followed in the function Create_Body().
 
 
+
+## 5. How the Creatures are Evolved
+
+  ### 1) Evolution of Body
+  * At each generation the creatures are evolved as per the random mutation selected.
+  * The random choice is done to append, delete or to let the creature remain as it is.
+  
+    #### Appending a link to the Creature
+    * After this a randomization of dimension and link shape is done following which we proceed to check whether the links can be added to the matrix.
+    * If so then they are added to the body of the creature by checking whether the maximum and minimum of each coordinates do not coincide with any other shapes.
+    * And additional check is added so that the links are not more than the maximum number of links. *This check was added since pybullet sometimes may crash halfway in the simulation due to insufficient memory.*
+
+    #### Deleting Links from the Creature
+    * A link is randomly chosen for deletion from the creature based on whether the creature is able to move fast or not.
+    * A constraint is added so that a link is not deleted whose subchildren are present in the urdf.
+    * If the link has children than another link is chosen randomly to prevent errors since joints have a hierachy.
+
+
+  ### 2) Evolution of Brain
+  * At each generation the creatures are evolved as per the random mutation selected.
+  * The random choice is done to append, delete or to let the creature remain as it is.
+  
+    #### Appending a link to the Creature
+    * After this a randomization of dimension and link shape is done following which we proceed to check whether the links can be added to the matrix.
+    * If so then they are added to the body of the creature by checking whether the maximum and minimum of each coordinates do not coincide with any other shapes.
+    * And additional check is added so that the links are not more than the maximum number of links. *This check was added since pybullet sometimes may crash halfway in the simulation due to insufficient memory.*
+
+    #### Deleting Links from the Creature
+    * A link is randomly chosen for deletion from the creature based on whether the creature is able to move fast or not.
+    * A constraint is added so that a link is not deleted whose subchildren are present in the urdf.
+    * If the link has children than another link is chosen randomly to prevent errors since joints have a hierachy.
+
+
+  
 ## 3. Random Shapes Generated
 
   * The generated morphologies are made of three types of shapes:
