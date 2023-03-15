@@ -13,9 +13,9 @@ import pandas as pd
 
 
 
-iter=10000 #iteration times
+iter=1000 #iteration times
 
-numpyseed=80000
+numpyseed=5000
 
 randomseed=700
 np.random.seed(numpyseed)
@@ -29,8 +29,8 @@ fitness_Values=[]
 
 
 
-populationSize= 10
-numberOfGenerations= 500
+populationSize= 1
+numberOfGenerations= 10
 
 x_cordinates= [i for i in range(numberOfGenerations+1)]
 df=pd.DataFrame()

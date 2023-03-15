@@ -21,7 +21,7 @@
             </geometry>
         </collision>
     </link>
-    <joint name="Link0_Link1" type="revolute">
+    <joint name="Link0_Link1" type="prismatic">
        <parent link="Link0"/>
        <child  link="Link1"/>
        <origin rpy="0 0 0" xyz="1 0.5 0.5" />
@@ -54,7 +54,7 @@
        <parent link="Link0"/>
        <child  link="Link2"/>
        <origin rpy="0 0 0" xyz="0.5 0.5 1" />
-       <axis xyz="0 0 1"/>
+       <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
     <link name="Link2">
@@ -79,7 +79,7 @@
             </geometry>
         </collision>
     </link>
-    <joint name="Link2_Link3" type="revolute">
+    <joint name="Link2_Link3" type="prismatic">
        <parent link="Link2"/>
        <child  link="Link3"/>
        <origin rpy="0 0 0" xyz="0 0.5 0.5" />
@@ -108,7 +108,7 @@
             </geometry>
         </collision>
     </link>
-    <joint name="Link0_Link4" type="revolute">
+    <joint name="Link0_Link4" type="prismatic">
        <parent link="Link0"/>
        <child  link="Link4"/>
        <origin rpy="0 0 0" xyz="0 0.5 0.5" />

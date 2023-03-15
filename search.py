@@ -5,9 +5,9 @@ import constants as c
 import pandas as pd
 import gc
 
-list_numpyseed=[800]  #6000, 200
-list_randomseed=[5000] #1000,29000
-folder='control' #'experiment'
+list_numpyseed=[6000]  #6000, 200
+list_randomseed=[1000] #1000,29000
+folder='control/Run1' #'experiment'
 
 for i in range (len(list_numpyseed)):
     gc.collect()
@@ -23,7 +23,7 @@ for i in range (len(list_numpyseed)):
     data=c.df
     print('Saving')
     print(data)
-    filename=folder+'/'+'fitness_valuesRuns'+str(i)
+    filename=folder+'/'+'fitness_valuesRuns'+str(10000)
     data.to_csv(filename+'.csv', index=False)
     print('Done')
     input("Press Enter To Continue")

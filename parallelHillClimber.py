@@ -46,11 +46,10 @@ class PARALLEL_HILL_CLIMBER :
 		
 	def Evaluate(self,solutions, child_true, currentGeneration):
 		for i in solutions:
-			solutions[i].Start_Simulation("GUI", child_true)
-
-			if(currentGeneration % 10 == 0 or currentGeneration==0):
-				pass
-				#solutions[i].Start_Simulation("GUI", child_true)
+			#solutions[i].Start_Simulation("GUI", child_true)
+			print('Generations-----', self.currentGeneration)
+			if(self.currentGeneration % 10 == 0 or self.currentGeneration==0):
+				solutions[i].Start_Simulation("GUI", child_true)
 			else:
 				solutions[i].Start_Simulation("DIRECT", child_true)
 		for j in solutions:
@@ -145,7 +144,7 @@ class PARALLEL_HILL_CLIMBER :
 		c.df[col_name] = best_fitness
 		#c.col=c.col+1
 		
-		with open('data/fitnessValues{0}_{1}.pkl'.format(str(c.numpyseed), str(c.randomseed)), 'wb') as f:
+		with open('experiment/fitnessValues{0}_{1}.pkl'.format(str(c.numpyseed), str(c.randomseed)), 'wb') as f:
 			pickle.dump(best_fitness, f)
 			f.close()
 #			

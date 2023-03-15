@@ -32,6 +32,7 @@ class ROBOT :
 		#os.system(f"rm body/body"+str(solutionID)+".urdf")
 		#self.fitnessArray = []
 		
+		
 
 		
 	def Prepare_To_Sense(self):
