@@ -6,8 +6,8 @@
 
 ## Table of Contents
 
-1. [Hypothesis] (https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#1-hypothesis)
-2. [Experiments Performed] (https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#2-experiments-performed)
+1. [Hypothesis](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#1-hypothesis)
+2. [Experiments Performed](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#2-experiments-performed)
 3. [Findings](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#3-findings) 
 4. [Graphs](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#4-graphs-chart_with_upwards_trend)
 5. [About The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/3D-Creature_locomotion/README.md#5-about-the-code)
