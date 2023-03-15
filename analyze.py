@@ -2,12 +2,13 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
-#backLegSensorValues= np.load('data/backLegSensorValues.npy')
-#frontLegSensorValues= np.load('data/frontLegSensorValues.npy')
-targetAngles_BackLeg=np.load('data/targetAngles_BackLeg.npy')
-targetAngles_FrontLeg=np.load('data/targetAngles_FrontLeg.npy')
+randomseed=[]
+numpyseed=[]
 
+experiment= pd.read_csv('/Users/ilesha/AndroidStudioProjects/GITHUB\ SYNC/artificial_bots/experiment/fitness_valuesRuns.csv')
+control=pd.read_csv('/Users/ilesha/AndroidStudioProjects/GITHUB\ SYNC/artificial_bots/control/fitness_valuesRuns.csv')
 plt.plot(targetAngles_BackLeg, label='targetAngles_BackLeg')
 plt.plot(targetAngles_FrontLeg, label='targetAngles_FrontLeg')
 
