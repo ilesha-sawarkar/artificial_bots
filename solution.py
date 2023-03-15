@@ -17,10 +17,6 @@ random.seed(c.randomseed)
 
 class SOLUTION:
 	def __init__(self, ID):
-		numpy.random.seed(c.numpyseed)
-		random.seed(c.randomseed)
-		print('SEED', c.numpyseed)
-		print('Seeed', c.randomseed)
 		
 		self.weights = numpy.random.rand(c.maxLinks+2,c.maxLinks+2) * 2 - 1
 		self.myID = ID
@@ -112,7 +108,7 @@ class SOLUTION:
 	
 		
 	def Create_Child_Body(self):
-		pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
+		pyrosim.Start_URDF("body/body"+str(self.myID)+".urdf")
 		
 		color_name = "Cyan"
 		
@@ -163,7 +159,7 @@ class SOLUTION:
 					elif (jointPositionAxis == 1):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1], shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 2):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 3):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "1 0 0")
 					elif (jointPositionAxis == 4):
@@ -178,13 +174,13 @@ class SOLUTION:
 					elif (jointPositionAxis == 1):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [0,shapeInfo[linkToJoin][1],0], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 2):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0,0,shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0,0,shapeInfo[linkToJoin][2]], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 3):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]),0,0], jointAxis = "1 0 0")
 					elif (jointPositionAxis == 4):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [0,-(shapeInfo[linkToJoin][1]),0], jointAxis = "0 1 0")
 					else:
-						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0,0,-(shapeInfo[linkToJoin][2])], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0,0,-(shapeInfo[linkToJoin][2])], jointAxis = "0 1 0")
 					self.motorNeuronList.append(linkToJoin + "_" + "Link" + link)		
 						
 						
@@ -193,21 +189,21 @@ class SOLUTION:
 						if (jointPositionAxis == 1):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 4):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + link)			
 					elif (grandParAxis == 1):
 						if (jointPositionAxis == 0):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 3):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), shapeInfo[linkToJoin][1]/2, 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + link)			
 							
 					elif (grandParAxis == 2):
@@ -225,21 +221,21 @@ class SOLUTION:
 						if (jointPositionAxis == 1):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), shapeInfo[linkToJoin][1]/2, 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 4):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + link)	
 					elif (grandParAxis == 4):
 						if (jointPositionAxis == 0):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 3):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin , child = link , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + link , parent = linkToJoin  , child = link , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + link)	
 					else:
 						if (jointPositionAxis == 0):
@@ -285,7 +281,7 @@ class SOLUTION:
 		
 		
 	def Create_Body(self):
-		pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
+		pyrosim.Start_URDF("body/body"+str(self.myID)+".urdf")
 		# pyrosim.Start_URDF("body.urdf")
 		
 		
@@ -688,7 +684,7 @@ class SOLUTION:
 					elif (jointPositionAxis == 1):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1], shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 2):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 3):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "1 0 0")
 					elif (jointPositionAxis == 4):
@@ -704,13 +700,13 @@ class SOLUTION:
 					elif (jointPositionAxis == 1):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [0,shapeInfo[linkToJoin][1],0], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 2):
-						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0,0,shapeInfo[linkToJoin][2]], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0,0,shapeInfo[linkToJoin][2]], jointAxis = "0 1 0")
 					elif (jointPositionAxis == 3):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]),0,0], jointAxis = "1 0 0")
 					elif (jointPositionAxis == 4):
 						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [0,-(shapeInfo[linkToJoin][1]),0], jointAxis = "0 1 0")
 					else:
-						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0,0,-(shapeInfo[linkToJoin][2])], jointAxis = "0 0 1")
+						pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0,0,-(shapeInfo[linkToJoin][2])], jointAxis = "0 1 0")
 					self.motorNeuronList.append(linkToJoin + "_" + "Link" + str(i))	
 						
 						
@@ -719,21 +715,21 @@ class SOLUTION:
 						if (jointPositionAxis == 1):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 4):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + str(i))	
 					elif (grandParAxis == 1):
 						if (jointPositionAxis == 0):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, shapeInfo[linkToJoin][1]/2, 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 3):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), shapeInfo[linkToJoin][1]/2, 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, shapeInfo[linkToJoin][1]/2, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + str(i))
 							
 							
@@ -753,11 +749,11 @@ class SOLUTION:
 						if (jointPositionAxis == 1):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), shapeInfo[linkToJoin][1]/2, 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 4):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), 0, -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + str(i))
 						
 							
@@ -765,11 +761,11 @@ class SOLUTION:
 						if (jointPositionAxis == 0):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [shapeInfo[linkToJoin][0]/2, -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 2):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), shapeInfo[linkToJoin][2]/2], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), shapeInfo[linkToJoin][2]/2], jointAxis = "0 1 0")
 						elif (jointPositionAxis == 3):
 							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin , child = "Link" + str(i) , type = "revolute", position = [-(shapeInfo[linkToJoin][0]/2), -(shapeInfo[linkToJoin][1]/2), 0], jointAxis = "1 0 0")
 						elif (jointPositionAxis == 5):
-							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 0 1")
+							pyrosim.Send_Joint(name = linkToJoin + "_" + "Link" + str(i) , parent = linkToJoin  , child = "Link" + str(i) , type = "revolute", position = [0, -(shapeInfo[linkToJoin][1]/2), -(shapeInfo[linkToJoin][2]/2)], jointAxis = "0 1 0")
 						self.motorNeuronList.append(linkToJoin + "_" + "Link" + str(i))
 						
 							
@@ -1263,10 +1259,15 @@ class SOLUTION:
 		self.locationMatrix = locationMatrix.copy()
 		self.connections = connections
 		
-		numSensorNeurons = sensorNeuronList.count(1)
-		randomRow =  random.randint(0,numSensorNeurons - 1)
+		numSensorNeurons = self.sensorNeuronList.count(1)
+		print(numSensorNeurons)
+		if (numSensorNeurons==0):
+			randomRow=0
+		else:
+			randomRow =  random.randint(0,numSensorNeurons - 1)
 		
 		numLinks = len(shapesAdded)
+
 		randomColumn = random.randint(0,numLinks - 1)
 		self.weights[randomRow,randomColumn] =  random.random() * 2 - 1
 		

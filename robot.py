@@ -16,7 +16,7 @@ class ROBOT :
 		#pyrosim.End()
 		print('solutionID : ',solutionID)
 		print('object:',objects)
-		self.robotId = p.loadURDF("body"+str(solutionID)+".urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
+		self.robotId = p.loadURDF("body/body"+str(solutionID)+".urdf") #, flags=p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
 		self.motors={}
 		self.sensors={}
 		
@@ -28,8 +28,8 @@ class ROBOT :
 		self.Prepare_To_Sense()
 		self.Prepare_To_Act()
 		
-		os.system(f"rm brain/brain"+str(solutionID)+".nndf")
-		os.system(f"rm body"+str(solutionID)+".urdf")
+		#os.system(f"rm brain/brain"+str(solutionID)+".nndf")
+		#os.system(f"rm body/body"+str(solutionID)+".urdf")
 		#self.fitnessArray = []
 		
 

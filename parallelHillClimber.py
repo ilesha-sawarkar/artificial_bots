@@ -12,7 +12,8 @@ class PARALLEL_HILL_CLIMBER :
 	def __init__(self, runCount):
 		
 		self.parents = {}
-		
+		os.system("rm body/body*.urdf")
+		os.system("rm brain/brain*.nndf")
 		#self.parent = SOLUTION()	
 		self.nextAvailableID = 0
 		self.runCount= runCount
@@ -22,11 +23,11 @@ class PARALLEL_HILL_CLIMBER :
 			self.parents[i] = SOLUTION(self.nextAvailableID)
 			self.nextAvailableID += 1
 		print('Parents:\n',self.parents)
-		os.system("rm brain/brain*.nndf")
+		#os.system("rm brain/brain*.nndf")
 		#os.system("rm data/fitness*.nndf")
 		self.currentGeneration=0
 		os.system("rm fitness*.txt")
-		os.system("rm body*.urdf")
+		
 		
 	def Evolve(self):
 		self.Evaluate(solutions=self.parents, child_true=0,currentGeneration= self.currentGeneration)

@@ -13,10 +13,11 @@ import pandas as pd
 
 
 
-iter=100 #iteration times
+iter=10000 #iteration times
 
-numpyseed=8000
-randomseed=100
+numpyseed=80000
+
+randomseed=700
 np.random.seed(numpyseed)
 random.seed(randomseed)
 
@@ -29,7 +30,7 @@ fitness_Values=[]
 
 
 populationSize= 10
-numberOfGenerations= 10
+numberOfGenerations= 500
 
 x_cordinates= [i for i in range(numberOfGenerations+1)]
 df=pd.DataFrame()
