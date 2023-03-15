@@ -1,7 +1,7 @@
 # artificial_bots
 
 
-## Table of Contents
+# Table of Contents
 
 1. [How To Run The Code](https://github.com/ilesha-sawarkar/artificial_bots/blob/kinematic_snake/README.md#1--how-to-run-the-code) 
 
